@@ -1,1 +1,0 @@
-<h4>You are now on the example page.</h4>
