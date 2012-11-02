@@ -1,5 +1,3 @@
 <?php
-
-  check_username($_POST['username']);
-
-?>
+$user = new user($db,"");
+$user->login($_POST['username'],$_POST['password']);

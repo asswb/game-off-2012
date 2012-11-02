@@ -1,29 +1,44 @@
 <?php
 
-function check_username_size($user){
-  if(strlen($user) > 32)
-    return false;
-  return true;
-}
+$user = new user($db);
 
-function check_username($user){
-  global $db;
-  $q = $db->query('SELECT COUNT(*) FROM users WHERE username="'.$user.'"');
-  $count = $q->fetch(PDO::FETCH_ASSOC);
-  echo $count['COUNT(*)'];
-  if($count['COUNT(*)'] > 0)
-    return true;
-  return false;
+class user {
+  var $data = null;
+  function __construct($db,$session=''){
+    $this->db = $db;
+    $this->session = $session;
+    if(isset($_COOKIE['session'])){
+      $this->session = $_COOKIE['session'];
+    }
+    if($this->session){
+      $this->load_user();
+    }
+  }
+  function login($username,$password){
+    $hash = sha1($password.SYS_SALT);
+    $q  = $this->db->query("SELECT * FROM users WHERE username = ".$this->db->quote($username)." AND password = ".$this->db->quote($hash) );
+    $r = $q->fetchAll(PDO::FETCH_ASSOC);
+    global $alert;
+    if(count($r)>0){
+      // extract the user data
+      $this->data = $r[0];
+      $this->session = sha1(uniqid('',TRUE).SYS_SALT);
+      $q = $this->db->query("UPDATE users SET session=".$this->db->quote($this->session)." WHERE uid = ".$this->db->quote($this->data['uid']) );
+      echo "<pre>".print_r($this->data,1)."</pre>";
+      $alert->add("Login Successful","You have been logged in.","success");
+    } else {
+      $this->logout();
+      $alert->add("Login Failed","Either your username or password are incorrect.","info");
+    }
+  }
+  function register($username,$password1,$password2){
+  
+  }
+  function logout(){
+    $this->data = null;
+    $this->session = null;
+  }
+  private function load_user(){
+  
+  }
 }
-
-function auth_user($user,$pass){
-  global $db;
-  $salt = SYS_SALT;
-  $enc_pass = sha1($salt.$pass.$salt); 
-  $q = $db->query('SELECT COUNT(*) FROM users WHERE username="'.$user.'" AND password="'.$enc_pass.'"');
-  if($count['COUNT(*)'] == 1) 
-    return true;
-  return false;
-}
-
-?>
