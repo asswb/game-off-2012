@@ -36,6 +36,13 @@ if(isset($exe)){
   }
 }
 
+$header_pages = array(
+  "login"=>"Login",
+  "register"=>"Register",
+  "leaderboard"=>"Leaderboard",
+  "issues"=>"Issues"
+);
+
 require("theme/header.php");
 echo $alert->render();
 

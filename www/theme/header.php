@@ -38,8 +38,9 @@
         <div class="container">
           <a class="brand" href=".">GitHub Tycoon</a>
           <ul class="nav">
-            <li><a href="?page=example">Example Page</a></li>
-            <li><a href="?page=leaderboard">Leaderboard</a></li>
+<?php foreach($header_pages as $rawp => $prettyp){ ?>
+            <li><a href="?page=<?php echo $rawp; ?>"><?php echo $prettyp; ?></a></li>
+<?php } ?>
           </ul>
         </div>
       </div>
