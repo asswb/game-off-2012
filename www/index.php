@@ -32,7 +32,7 @@ if(isset($exe)){
   if(in_array("exe/$exe.php",$valid_exes)){
     require("exe/$exe.php");
   } else {
-    $alerts->add("Invalid `exe`","The execute command, `$exe`, is invalid.","error");
+    $alert->add("Invalid `exe`","The execute command, `$exe`, is invalid.","error");
   }
 }
 
