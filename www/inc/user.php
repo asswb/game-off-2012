@@ -4,13 +4,10 @@ $user = new user($db);
 
 class user {
   var $data = null;
-  function __construct($db,$session=''){
+  function __construct($db){
     $this->db = $db;
-    $this->session = $session;
     if(isset($_COOKIE['session'])){
       $this->session = $_COOKIE['session'];
-    }
-    if($this->session){
       $this->load_user();
     }
   }
@@ -24,22 +21,31 @@ class user {
       $this->data = $r[0];
       $this->session = sha1(uniqid('',TRUE).SYS_SALT);
       $this->data['session'] = $this->session;// use this session instead of old one.
+      setcookie("session", $this->session,time()+60*60*24*52);
       $q = $this->db->query("UPDATE users SET session=".$this->db->quote($this->session)." WHERE uid = ".$this->db->quote($this->data['uid']) );
-      echo "<pre>".print_r($this->data,1)."</pre>";
       $alert->add("Login Successful","You have been logged in.","success");
     } else {
       $this->logout();
       $alert->add("Login Failed","Either your username or password are incorrect.","info");
     }
   }
-  function register($username,$password1,$password2){
-  
-  }
   function logout(){
-    $this->data = null;
-    $this->session = null;
+    unset($this->data);
+    unset($this->session);
+    setcookie("session","",time()-3600);
   }
   private function load_user(){
+    $q  = $this->db->query("SELECT * FROM users WHERE session = ".$this->db->quote($this->session) );
+    $r = $q->fetchAll(PDO::FETCH_ASSOC);
+    global $alert;
+    if(count($r)>0){
+      $this->data = $r;
+    } else {
+      $this->logout();
+      $alert->add("Session Expired","Either you logged in elsewhere, or your session has expired.","info");
+    }
+  }
+  function register($username,$password1,$password2){
   
   }
 }

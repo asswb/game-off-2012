@@ -64,4 +64,13 @@ function register_form(){
 </form>
   <?php
 }
-?>
+
+function logout_form(){
+  ?>
+<h4>Are you sure you want to log out?</h4>
+<form method="POST" action="">
+  <input type="hidden" name="exe" value="logout" />
+  <button class="btn btn-danger" type="submit">I'm Sure!</button>
+</form>
+  <?php
+}
