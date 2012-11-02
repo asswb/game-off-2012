@@ -52,12 +52,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `session` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `repo_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `com` int(11) NOT NULL,
   `cbq` int(11) NOT NULL,
   `issue` int(11) NOT NULL,
   `issue_eta` int(10) NOT NULL,
-  UNIQUE KEY `uid` (`uid`,`username`)
+  UNIQUE KEY `uid` (`uid`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `session` (`session`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
