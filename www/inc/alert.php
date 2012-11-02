@@ -1,6 +1,6 @@
 <?php
 
-$alerts = new alert();
+$alert = new alert();
 
 class alert {
   private $alerts = array();
