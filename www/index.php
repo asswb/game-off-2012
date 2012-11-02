@@ -1,14 +1,18 @@
 <?php
 require('config.php');
 
+if(DEBUG){
+  error_reporting(-1);
+}
+
 $incs = glob("inc/*.php");
 foreach($incs as $inc){
   require($inc);
 }
 
 if(DEBUG){
-  error_reporting(-1);
   $alert->add("Debug Mode","Debugging is enabled.","error");
+  $alert->add('$_POST','<pre>'.print_r($_POST,1).'</pre>');
 }
 
 if(isset($_POST['exe'])){
