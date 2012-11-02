@@ -1,5 +1,7 @@
 <?php
 
+$alerts = new alert();
+
 class alert {
   private $alerts = array();
   function render(){

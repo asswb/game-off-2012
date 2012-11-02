@@ -1,7 +1,10 @@
 <?php
 require('config.php');
-require('inc/alert.php');
-$alert = new alert();
+
+$incs = glob("inc/*.php");
+foreach($incs as $inc){
+  require($inc);
+}
 
 if(DEBUG){
   error_reporting(-1);
