@@ -39,6 +39,7 @@
           <a class="brand" href=".">GitHub Tycoon</a>
           <ul class="nav">
             <li><a href="?page=example">Example Page</a></li>
+            <li><a href="?page=leaderboard">Leaderboard</a></li>
           </ul>
         </div>
       </div>
