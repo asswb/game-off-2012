@@ -23,6 +23,7 @@ class user {
       // extract the user data
       $this->data = $r[0];
       $this->session = sha1(uniqid('',TRUE).SYS_SALT);
+      $this->data['session'] = $this->session;// use this session instead of old one.
       $q = $this->db->query("UPDATE users SET session=".$this->db->quote($this->session)." WHERE uid = ".$this->db->quote($this->data['uid']) );
       echo "<pre>".print_r($this->data,1)."</pre>";
       $alert->add("Login Successful","You have been logged in.","success");
