@@ -2,7 +2,7 @@
 
 function login_form(){
   ?>
-<form class="form-horizontal" method="post" action="">
+<form class="form-horizontal hero-center" method="post" action="">
   <input type="hidden" name="exe" value="login" />
   <div class="control-group">
     <label class="control-label">Username</label>
@@ -27,7 +27,7 @@ function login_form(){
 
 function register_form(){
   ?>
-<form class="form-horizontal" method="post" action="">
+<form class="form-horizontal hero-center" method="post" action="">
   <input type="hidden" name="exe" value="register" />
   <div class="control-group">
     <label class="control-label">Username</label>
@@ -64,10 +64,15 @@ function register_form(){
 
 function logout_form(){
   ?>
-<h4>Are you sure you want to log out?</h4>
-<form method="POST" action="">
+<form class="form-horizontal hero-center" method="POST" action="">
+  <h4>Are you sure you want to log out?</h4>
   <input type="hidden" name="exe" value="logout" />
-  <button class="btn btn-danger" type="submit">I'm Sure!</button>
+  <div class="control-group">
+    <label class="control-label"></label>
+    <div class="controls">
+      <button class="btn btn-danger" type="submit">I'm Sure!</button>
+    </div>
+  </div>
 </form>
   <?php
 }
