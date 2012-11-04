@@ -49,7 +49,7 @@ $header_pages['leaderboard'] = "Leaderboard";
 require("theme/header.php");
 echo $alert->render();
 
-if(!isset($page)){
+if(!file_exists("page/$page.php")){
   $page = "landing";
 }
 
