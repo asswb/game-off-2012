@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `issue_eta` int(10) NOT NULL,
   UNIQUE KEY `uid` (`uid`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `session` (`session`)
+  KEY `session` (`session`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
