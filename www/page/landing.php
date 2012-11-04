@@ -18,4 +18,3 @@ if(isset($user->session)){
 <?php
   login_form();
 }
-?>

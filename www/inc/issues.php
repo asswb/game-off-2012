@@ -2,8 +2,8 @@
 
 class issues
 {
-  var $db;
-  function __construct($_db,$_uid){
+  public $db;
+  public function __construct($_db,$_uid){
     $this->db = $_db;
     $this->uid = $_uid;
   }

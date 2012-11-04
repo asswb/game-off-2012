@@ -4,7 +4,7 @@
 
     <!-- Le javascript
     ================================================== -->
-    <!-- 
+    <!--
     <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap-transition.js"></script>
     <script src="bootstrap/js/bootstrap-alert.js"></script>

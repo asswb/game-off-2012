@@ -3,9 +3,9 @@
 $user = new user($db,$alert);
 
 class user {
-  var $data = null;
-  var $alert = null;
-  function __construct($db,&$alert){
+  public $data = null;
+  public $alert = null;
+  public function __construct($db,&$alert){
     $this->db = $db;
     $this->alert = $alert;
     if(isset($_COOKIE['session'])){
@@ -16,7 +16,7 @@ class user {
   private function password_hash_generate($password){
     return sha1($password.SYS_SALT);
   }
-  function login($username,$password){
+  public function login($username,$password){
     $hash = $this->password_hash_generate($password);
     $q  = $this->db->query("SELECT * FROM users WHERE username = ".$this->db->quote($username)." AND password = ".$this->db->quote($hash) );
     $r = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -35,7 +35,7 @@ class user {
       return false;
     }
   }
-  function logout(){
+  public function logout(){
     unset($this->data);
     unset($this->session);
     setcookie("session","",time()-3600);
@@ -51,7 +51,7 @@ class user {
       $this->alert->add("Session Expired","Either you logged in elsewhere, or your session has expired.","info");
     }
   }
-  function register($username,$password1,$password2,$repo_name){
+  public function register($username,$password1,$password2,$repo_name){
     // Check username; 4-32 alphanumeric characters and numbers with underscores
     if(!preg_match("@^[a-zA-Z0-9\_]{4,32}$@",$username)){
       $this->alert->add("Invalid Username","Usernames must be 4 to 32 characters and may only contain a-z, A-Z, 0-9 and `_`.","info");

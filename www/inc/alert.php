@@ -4,7 +4,7 @@ $alert = new alert();
 
 class alert {
   private $alerts = array();
-  function render(){
+  public function render(){
     $output = '';
     foreach($this->alerts as $alert){
       $output .= '
@@ -15,7 +15,7 @@ class alert {
     }
     return $output;
   }
-  function add($title,$message,$type=""){
+  public function add($title,$message,$type=""){
     $tmp = new stdClass();
     $tmp->title = $title;
     $tmp->message = $message;

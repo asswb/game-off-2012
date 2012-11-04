@@ -1,6 +1,6 @@
 <?php
 
-/* SAMPLE USAGE: 
+/* SAMPLE USAGE:
 
 echo "<pre>";
 
@@ -46,10 +46,10 @@ echo "</pre>";
 */
 
 class poormanscron {
-  function __construct(){
+  public function __construct(){
     $this->now = time();
   }
-  function run($lastrun,$interval){
+  public function run($lastrun,$interval){
     $diff = $this->now - $lastrun;
     $data = new stdClass();
     if($diff > 0){

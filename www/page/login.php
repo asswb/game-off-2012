@@ -7,4 +7,3 @@ if(isset($user->session)){
 } else {
   login_form();
 }
-?>
