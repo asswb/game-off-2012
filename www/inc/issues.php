@@ -15,28 +15,15 @@ class issues
     $return_array = array();
     $q = $this->db->query('SELECT issue,issue_eta FROM users WHERE userid='.$this->db->quote($this->uid));
     while($row = $q->fetch(PDO::FETCH_ASSOC)){
-      $q2 = $this->db->query('SELECT name,description,type FROM issue_table WHERE iid='.$this->db->quote($row["issue"]));
-      $row2 = $q2->fetch(PDO::FETCH_ASSOC);
-      $return_array['iid'] = $row["issue"];
-      $return_array['name'] = $row2["name"];
-      $return_array['description'] = $row2["description"];
-      $return_array['type'] = $row2["type"];
-      $return_array['eta'] = $row["issue_eta"];
+      $q2 = $this->db->query('SELECT iid,name,description,type FROM issue_table WHERE iid='.$this->db->quote($row["issue"]));
+      $return_array[] = $q2->fetch(PDO::FETCH_ASSOC);
     }
     return $return_array;
   }
 
   public function get_issue_detail($iid){
-    $return_array = array();
-    $q2 = $this->db->query('SELECT name,description,type FROM issue_table WHERE iid='.$this->db->quote($iid));
-    $row2 = $q2->fetch(PDO::FETCH_ASSOC);
-    $return_array['iid'] = $row["issue"];
-    $return_array['name'] = $row2["name"];
-    $return_array['description'] = $row2["description"];
-    $return_array['type'] = $row2["type"];
-    $return_array['eta'] = $row["issue_eta"];
-
-    return $return_array;
+    $q2 = $this->db->query('SELECT iid,name,description,type,eta FROM issue_table WHERE iid='.$this->db->quote($iid));
+    return $q2->fetch(PDO::FETCH_ASSOC);
   }
 
   public function set_current_issue($iid){
