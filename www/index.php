@@ -5,9 +5,15 @@ if(DEBUG){
   error_reporting(-1);
 }
 
+// Load dependent classes first.
+// TODO: Make this list static once the MVP is over.
+require("inc/db.php");
+require("inc/alert.php");
+
+// Lazy Load everything else
 $incs = glob("inc/*.php");
 foreach($incs as $inc){
-  require($inc);
+  require_once($inc);
 }
 
 if(DEBUG){

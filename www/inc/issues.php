@@ -1,9 +1,5 @@
 <?php
 
-if(isset($user->session)){
-  $issues = new issues();
-}
-
 class issues
 {
   var $db;

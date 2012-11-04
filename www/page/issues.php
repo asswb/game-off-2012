@@ -1,5 +1,7 @@
 <?php
 if(isset($user->session)){
+$issues = new issues($db,$user->data['uid']);
+echo "<pre>".print_r($issues,1)."</pre>";
 ?>
 <h2>Issues</h2>
 <table class="table table-striped">
