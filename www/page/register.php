@@ -1,1 +1,1 @@
-<?php register_form(); ?>
+<?php register_form();
