@@ -49,7 +49,7 @@ if(isset($user->session)){
 require("theme/header.php");
 echo $alert->render();
 
-if(!file_exists("page/$page.php")){
+if(!isset($page) or !file_exists("page/$page.php")){
   $page = "landing";
 }
 
