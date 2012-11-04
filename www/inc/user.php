@@ -13,8 +13,11 @@ class user {
       $this->load_user();
     }
   }
+  private function password_hash_generate($password){
+    return sha1($password.SYS_SALT);
+  }
   function login($username,$password){
-    $hash = sha1($password.SYS_SALT);
+    $hash = $this->password_hash_generate($password);
     $q  = $this->db->query("SELECT * FROM users WHERE username = ".$this->db->quote($username)." AND password = ".$this->db->quote($hash) );
     $r = $q->fetchAll(PDO::FETCH_ASSOC);
     if(count($r)>0){
@@ -39,7 +42,7 @@ class user {
     return true;
   }
   private function load_user(){
-    $q  = $this->db->query("SELECT * FROM users WHERE session = ".$this->db->quote($this->session) );
+    $q = $this->db->query("SELECT * FROM users WHERE session = ".$this->db->quote($this->session) );
     $r = $q->fetchAll(PDO::FETCH_ASSOC);
     if(count($r)>0){
       $this->data = $r;
@@ -49,6 +52,28 @@ class user {
     }
   }
   function register($username,$password1,$password2,$repo_name){
-    $this->alert->add("You!","Stop in the name of love!");
+    // Check username; 4-32 alphanumeric characters and numbers with underscores
+    if(!preg_match("@^[a-zA-Z0-9\_]{4,32}$@",$username)){
+      $this->alert->add("Invalid Username","Usernames must be 4 to 32 characters and may only contain a-z, A-Z, 0-9 and `_`.","info");
+      return false;
+    }
+    $q = $this->db->query("SELECT uid FROM users WHERE username = ".$this->db->quote($username));
+    $r = $q->fetchAll(PDO::FETCH_ASSOC);
+    if(count($r)>0){
+      $this->alert->add("Username Already Exists","This username has already been registered.","info");
+      return false;
+    }
+    if($password1 != $password2){
+      $this->alert->add("Password Mismatch","The passwords you supplied do not match.","info");
+      return false;
+    }
+    if(!preg_match("@^[a-zA-Z0-9\_\s]{2,64}$@",$repo_name)){
+      $this->alert->add("Invalid Repository Name","Repository names must be 4 to 64 characters and may only contain a-z, A-Z, 0-9, ` ` and `_`.","info");
+      return false;
+    }
+    $hash = $this->password_hash_generate($password1);
+    $q = $this->db->query("INSERT INTO users (username,password,repo_name) VALUES (".$this->db->quote($username).",".$this->db->quote($hash).",".$this->db->quote($repo_name).")");
+    $this->alert->add("Registration Successful","You have been properly registered!","success");
+    return true;
   }
 }
