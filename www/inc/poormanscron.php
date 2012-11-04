@@ -1,6 +1,8 @@
-<pre><?php
+<?php
 
 /* SAMPLE USAGE: 
+
+echo "<pre>";
 
 // Init the class
 $cron = new poormanscron();
@@ -38,6 +40,9 @@ if($lastrun != 0){//Check against a sentinel value
 } else {
   echo "This event already happend.\n";
 }
+
+echo "</pre>";
+
 */
 
 class poormanscron {
