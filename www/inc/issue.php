@@ -1,28 +1,23 @@
 <?php
 
-class Issues 
+class issues
 {
   var $db;
 
-  public function Issues($_db){
+  function __construct($_db,$_user){
     $this->db = $_db;
-  }
-  
-  public function set_user($_user){
     $this->user = $_user;
   }
 
   public function get_issues(){
     $db = $this->db;
     $user = $this->user;
-  
   }
 
-  public function get_current_issue(){
+  public function get_current_issues(){
     $db = $this->db;
     $user = $this->user;
     $return_array = array();
-    
     $q = $db->query('SELECT issue,issue_eta FROM users WHERE userid="'.$user.'"');
     while($row = $q->fetch(PDO::FETCH_ASSOC)){
       $q2 = $db->query('SELECT name,description,type FROM issue_table WHERE iid="'.$row["issue"].'"');
@@ -39,7 +34,6 @@ class Issues
   public function get_issue_detail($iid){
     $db = $this->db;
     $return_array = array();
-    
     $q2 = $db->query('SELECT name,description,type FROM issue_table WHERE iid="'.$iid.'"');
     $row2 = $q2->fetch(PDO::FETCH_ASSOC);
     $return_array['iid'] = $row["issue"];
@@ -55,7 +49,7 @@ class Issues
     $db = $this->db;
     $user = $this->user;
     $eta = calculate_eta($iid);
-    
+
     $db->query('UPDATE users SET issue="'.$iid.'",issue_eta="'.$eta.'" WHERE userid="'.$user.'"');
   }
 
@@ -65,7 +59,7 @@ class Issues
 
     $q = $db->query('SELECT cbq FROM users WHERE userid="'.$user.'"');
     $row = $q->fetch(PDO::FETCH_ASSOC);
-    
+
     $q2 = $db->query('SELECT time FROM issue_table WHERE iid="'.$iid.'"');
     $row2 = $q2->fetch(PDO::FETCH_ASSOC);
 
