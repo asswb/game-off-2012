@@ -13,6 +13,7 @@ if(isset($user->session)){
 <?php
 } else {
 ?>
+<h2>Welcome</h2>
 <h4>Welcome to GitHub Tycoon! Please login or register to play!</h4>
 <?php
   login_form();

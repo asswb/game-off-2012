@@ -2,6 +2,7 @@
 
 function login_form(){
   ?>
+<h2>Login</h2>
 <form class="form-horizontal hero-center" method="post" action="">
   <input type="hidden" name="exe" value="login" />
   <div class="control-group">
@@ -27,6 +28,7 @@ function login_form(){
 
 function register_form(){
   ?>
+<h2>Register</h2>
 <form class="form-horizontal hero-center" method="post" action="">
   <input type="hidden" name="exe" value="register" />
   <div class="control-group">
@@ -64,6 +66,7 @@ function register_form(){
 
 function logout_form(){
   ?>
+<h2>Logout</h2>
 <form class="form-horizontal hero-center" method="POST" action="">
   <h4>Are you sure you want to log out?</h4>
   <input type="hidden" name="exe" value="logout" />
