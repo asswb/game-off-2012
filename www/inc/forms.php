@@ -22,9 +22,6 @@ function login_form(){
     </div>
   </div>
 </form>
-
-<a class="btn" href="?page=register">Register Here</a>
-
   <?php
 }
 
