@@ -3,24 +3,19 @@
 class issues
 {
   var $db;
-
-  function __construct($_db,$_user){
+  function __construct($_db,$_uid){
     $this->db = $_db;
-    $this->user = $_user;
+    $this->uid = $_uid;
   }
 
   public function get_issues(){
-    $db = $this->db;
-    $user = $this->user;
   }
 
   public function get_current_issues(){
-    $db = $this->db;
-    $user = $this->user;
     $return_array = array();
-    $q = $db->query('SELECT issue,issue_eta FROM users WHERE userid="'.$user.'"');
+    $q = $this->db->query('SELECT issue,issue_eta FROM users WHERE userid="'.$this->uid.'"');
     while($row = $q->fetch(PDO::FETCH_ASSOC)){
-      $q2 = $db->query('SELECT name,description,type FROM issue_table WHERE iid="'.$row["issue"].'"');
+      $q2 = $this->db->query('SELECT name,description,type FROM issue_table WHERE iid="'.$row["issue"].'"');
       $row2 = $q2->fetch(PDO::FETCH_ASSOC);
       $return_array['iid'] = $row["issue"];
       $return_array['name'] = $row2["name"];
@@ -32,9 +27,8 @@ class issues
   }
 
   public function get_issue_detail($iid){
-    $db = $this->db;
     $return_array = array();
-    $q2 = $db->query('SELECT name,description,type FROM issue_table WHERE iid="'.$iid.'"');
+    $q2 = $this->db->query('SELECT name,description,type FROM issue_table WHERE iid="'.$iid.'"');
     $row2 = $q2->fetch(PDO::FETCH_ASSOC);
     $return_array['iid'] = $row["issue"];
     $return_array['name'] = $row2["name"];
@@ -46,21 +40,16 @@ class issues
   }
 
   public function set_current_issue($iid){
-    $db = $this->db;
-    $user = $this->user;
     $eta = calculate_eta($iid);
-
-    $db->query('UPDATE users SET issue="'.$iid.'",issue_eta="'.$eta.'" WHERE userid="'.$user.'"');
+    $this->db->query('UPDATE users SET issue="'.$iid.'",issue_eta="'.$eta.'" WHERE uid="'.$this->uid.'"');
   }
 
   private function calculate_eta($iid){
-    $db = $this->db;
-    $user = $this->user;
 
-    $q = $db->query('SELECT cbq FROM users WHERE userid="'.$user.'"');
+    $q = $this->db->query('SELECT cbq FROM users WHERE userid="'.$this->uid.'"');
     $row = $q->fetch(PDO::FETCH_ASSOC);
 
-    $q2 = $db->query('SELECT time FROM issue_table WHERE iid="'.$iid.'"');
+    $q2 = $this->db->query('SELECT time FROM issue_table WHERE iid="'.$iid.'"');
     $row2 = $q2->fetch(PDO::FETCH_ASSOC);
 
     return ($row['cbq'] * $row2['time']);
