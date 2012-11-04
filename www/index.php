@@ -37,14 +37,14 @@ if(isset($exe)){
 }
 
 $header_pages = array();
+$header_pages['leaderboard'] = "Leaderboard";
 if(isset($user->session)){
   $header_pages['issues'] = "Issues";
   $header_pages['logout'] = "Logout";
 } else {
-  $header_pages['login'] = "Login";
   $header_pages['register'] = "Register";
+  $header_pages['login'] = "Login";
 }
-$header_pages['leaderboard'] = "Leaderboard";
 
 require("theme/header.php");
 echo $alert->render();
