@@ -45,7 +45,7 @@ class user {
     $q = $this->db->query("SELECT * FROM users WHERE session = ".$this->db->quote($this->session) );
     $r = $q->fetchAll(PDO::FETCH_ASSOC);
     if(count($r)>0){
-      $this->data = $r;
+      $this->data = $r[0];
     } else {
       $this->logout();
       $this->alert->add("Session Expired","Either you logged in elsewhere, or your session has expired.","info");
