@@ -1,3 +1,6 @@
+<?php
+if(isset($user->session)){
+?>
 <h2>Issues</h2>
 <table class="table table-striped">
   <thead>
@@ -29,3 +32,7 @@ if($count == 0){
 }
 ?>
 </table>
+<?php
+} else {
+  login_form();
+}
