@@ -135,7 +135,7 @@ class issues {
   public function calculate_eta($issue){
     $cbq = $this->user->data['cbq'];
     $time = $issue['time'];
-    return $time/($cbq+1);
+    return $time/($cbq+1)*SYS_ISSUE_FACTOR;
   }
   public function count(){
     $q = $this->db->query("SELECT count(uiid) as count FROM user_issue_table WHERE uid=".$this->db->quote($this->uid));

@@ -23,4 +23,7 @@ define("SYS_ISSUE_INTERVAL",10);
 // reported.
 define("SYS_BUG_CBQ_CHANGE",-2);
 
+// This will multiply every time estimate by this value.
+define("SYS_ISSUE_FACTOR",10);
+
 define("DEBUG",FALSE); // Enable the debug flag
