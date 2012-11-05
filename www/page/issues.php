@@ -4,11 +4,14 @@ if(isset($user->session)){
 <h2>Issues</h2>
 <?php
   if($current_issue = $issues->get_current_issue()){
-    echo "<pre>".print_r($user->data,1)."</pre>";
-    echo "<pre>".print_r($current_issue,1)."</pre>";
+    $max = $issues->calculate_eta($current_issue);
+    $current = $user->data['issue_eta']-time();
+    $percent = floor((1-$current/$max)*100);
 ?>
-<div class="progress">
-  <div class="bar" style="width: 60%;"></div>
+<h4>Working on issue `<?php echo $current_issue['name']; ?>`.</h4>
+<p><?php echo $issues->stostr($user->data['issue_eta'] - time()); ?> remain.</p>
+<div class="progress progress-striped">
+  <div class="bar" style="width: <?php echo $percent; ?>%;"><?php echo $percent; ?>%</div>
 </div>
 <?php
   } else {
