@@ -22,8 +22,7 @@ foreach($incs as $inc){
 }
 
 if(DEBUG){
-  $alert->add("Debug Mode","Debugging is enabled.","error");
-  $alert->add('$_POST','<pre>'.print_r($_POST,1).'</pre>',"info");
+  $alert->add('Debug Mode','Debugging is enabled.<pre>$_POST:'.print_r($_POST,1).'</pre>',"error");
 }
 
 if(isset($_POST['exe'])){
