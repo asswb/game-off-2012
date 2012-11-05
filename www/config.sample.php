@@ -19,4 +19,8 @@ define("SYS_SALT",""); // System salt for passwords
 // The smaller this number, the faster one gets tickets.
 define("SYS_ISSUE_INTERVAL",10);
 
+// This determines how much CQB a user will lose for every bug
+// reported.
+define("SYS_BUG_CBQ_CHANGE",-2);
+
 define("DEBUG",FALSE); // Enable the debug flag

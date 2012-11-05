@@ -54,6 +54,7 @@ class issues {
     if($info->run > 0){
       $q = $this->db->query("SELECT iid,chance FROM issue_table");
       $new_issues = 0;
+      $bugs = 0;
       $cache = $q->fetchAll(PDO::FETCH_ASSOC);
       for($i=0;$i<$info->run;$i++){
         foreach($cache as $test){
@@ -62,6 +63,11 @@ class issues {
             $r = $q->fetchAll(PDO::FETCH_ASSOC);
             if(count($r)==0){
               $this->db->query("INSERT INTO user_issue_table (uid,iid) VALUES (".$this->db->quote($this->uid).",".$this->db->quote($test['iid']).");");
+              $q = $this->db->query("SELECT type FROM issue_table WHERE iid=".$this->db->quote($test['iid']));
+              $r = $q->fetchAll(PDO::FETCH_ASSOC);
+              if($r[0]['type']=="bug"){
+                $bugs++;
+              }
               $new_issues++;
             }
           }
@@ -69,7 +75,19 @@ class issues {
       }
       $cache = null;
       if($new_issues > 0){
-        $this->alert->add("New Issues","$new_issues new issue".($new_issues>1?"s":"")." have been reported.","info");
+        if($bugs){
+          $new_cbq = $this->user->data['cbq']+(SYS_BUG_CBQ_CHANGE*$bugs/100);
+          if($new_cbq > 1){
+            $new_cbq = 1;
+          } elseif($new_cbq < 0){
+            $new_cbq = 0;
+          }
+          $cbq_change = "<p>&Delta; Code Base Quali ty: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".(SYS_BUG_CBQ_CHANGE*$bugs)."%]</p>";
+          $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).' WHERE uid='.$this->db->quote($this->uid));
+        } else {
+          $cbq_change = "";
+        }
+        $this->alert->add("New Issues","<p>$new_issues new issue".($new_issues>1?"s":"")." have been reported.</p>".$cbq_change,"info");
       }
       $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->uid) );
     }
