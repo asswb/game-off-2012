@@ -35,14 +35,11 @@ class issues {
   }
 
   private function calculate_eta($iid){
-
-    $q = $this->db->query('SELECT cbq FROM users WHERE userid='.$this->db->quote($this->uid));
+    $cbq = $this->user->data['cbq'];
+    $q = $this->db->query('SELECT time FROM issue_table WHERE iid='.$this->db->quote($iid));
     $row = $q->fetch(PDO::FETCH_ASSOC);
-
-    $q2 = $this->db->query('SELECT time FROM issue_table WHERE iid='.$this->db->quote($iid));
-    $row2 = $q2->fetch(PDO::FETCH_ASSOC);
-
-    return $row2['time']/$row['cbq'];
+    $time = $row['time'];
+    return $time/$cbq;
   }
 
   private function type_classes($type){
