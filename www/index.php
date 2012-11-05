@@ -1,5 +1,9 @@
 <?php
-require('config.php');
+if(file_exists('config.php')){
+  require('config.php');
+} else {
+  die("<h1>Missing `config.php`</h1><p>To continue, please copy `config.sample.php` to `config.php` and supply the appropriate defines.</p>");
+}
 
 if(DEBUG){
   error_reporting(-1);
