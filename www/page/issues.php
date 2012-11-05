@@ -4,7 +4,13 @@ if(isset($user->session)){
 <h2>Issues</h2>
 <?php
   if($current_issue = $issues->get_current_issue()){
+    echo "<pre>".print_r($user->data,1)."</pre>";
     echo "<pre>".print_r($current_issue,1)."</pre>";
+?>
+<div class="progress">
+  <div class="bar" style="width: 60%;"></div>
+</div>
+<?php
   } else {
 ?>
 <table class="table table-striped">

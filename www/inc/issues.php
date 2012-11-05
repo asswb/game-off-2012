@@ -20,10 +20,10 @@ class issues {
       $this->user->data['issue_eta'] = 0;
     } else {
       $issue = $this->get_issue($iid);
-      $eta = $this->calculate_eta($issue);
+      $eta = floor($this->calculate_eta($issue)+time());
       $this->db->query('UPDATE users SET issue='.$this->db->quote($iid).',issue_eta='.$this->db->quote($eta).' WHERE uid='.$this->db->quote($this->uid));
       $this->user->data['issue'] = $iid;
-      $this->user->data['issue_eta'] = $eta+time();
+      $this->user->data['issue_eta'] = $eta;
     }
   }
 
@@ -107,7 +107,7 @@ class issues {
 
   public function render_teaser($issue){
     $type = '<span class="'.$this->type_classes($issue['type']).'">'.$issue['type'].'</span>';
-    $time = $this->stostr($issue['time']);
+    $time = $this->stostr($this->calculate_eta($issue));
     return <<<EOT
 <tbody>
   <tr>
