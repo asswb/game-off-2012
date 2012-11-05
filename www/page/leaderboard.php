@@ -24,7 +24,7 @@ while($row = $q->fetch(PDO::FETCH_ASSOC)){
       <td><?php echo $row['com']; ?> people</td>
       <td>
         <div class="progress progress-success">
-          <div class="bar" style="width: <?php echo $row['cbq']*100; ?>%;"><?php echo ($row['cbq']*100); ?>%</div>
+          <div class="bar" style="width: <?php echo $row['cbq']*100; ?>%;"><?php echo round($row['cbq']*100,2); ?>%</div>
         </div>
       </td>
       <td><?php echo $row['score']; ?></td>
