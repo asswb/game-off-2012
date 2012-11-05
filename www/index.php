@@ -53,8 +53,8 @@ if(isset($exe)){
 $header_pages = array();
 $header_pages['leaderboard'] = "Leaderboard";
 if(isset($user->session)){
-  $header_pages['issues'] = "Issues [ ".$issues->count()." ]";
-  $header_pages['logout'] = "Logout [ ".$user->data['username']." ]";
+  $header_pages['issues'] = "Issues <span class=\"badge badge-inverse\">".$issues->count()."</span>";
+  $header_pages['logout'] = "Logout <span class=\"badge badge-inverse\">".$user->data['username']."</span>";
 } else {
   $header_pages['register'] = "Register";
   $header_pages['login'] = "Login";
