@@ -119,7 +119,11 @@ class issues {
     $time = $issue['time'];
     return $time/($cbq+1);
   }
-
+  public function count(){
+    $q = $this->db->query("SELECT count(uiid) as count FROM user_issue_table WHERE uid=".$this->db->quote($this->uid));
+    $r = $q->fetchAll(PDO::FETCH_ASSOC);
+    return $r[0]['count'];
+  }
   private function type_classes($type){
     $t = "label";
     if($type=="bug"){
