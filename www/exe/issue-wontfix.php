@@ -1,4 +1,4 @@
 <?php
 if(isset($user->session)){
-  $alert->add("Issue Wontfix","The issue has been marked as wontfix.","success");
+  $alert->add("Wontfix Issue","The issue has been marked as wontfix.","success");
 }
