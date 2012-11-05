@@ -98,9 +98,16 @@ class issues {
 <tbody>
   <tr>
     <td>{$issue['name']}</td>
+    <td>{$issue['description']}</td>
     <td>{$type}</td>
     <td>{$time}</td>
-    <td>{$issue['uiid']}</td>
+    <td>
+      <div class="btn-group">
+        <a class="btn" alt="Start" title="Start" href="?page=issues&uiid={$issue['uiid']}"><i class="icon-play"></i></a>
+        <a class="btn" alt="Delete" title="Delete" href="?page=issues&uiid={$issue['uiid']}"><i class="icon-ban-circle"></i></a>
+      </div>
+    
+    </td>
   </tr>
 </tbody>
 EOT;

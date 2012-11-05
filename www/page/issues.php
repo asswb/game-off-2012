@@ -7,7 +7,8 @@ $issues = new issues($db,$user,$cron);
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Issue Name</th>
+      <th>Name</th>
+      <th>Description</th>
       <th></th>
       <th>Time to Complete</th>
       <th></th>
