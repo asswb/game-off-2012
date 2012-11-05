@@ -21,7 +21,7 @@ if(isset($user->session)){
   <li>PHP</li>
   <li>MySQL</li>
   <li>Twitter Bootstrap</li>
-  <li>Bootswap</li>
+  <li>Bootswatch</li>
 </ul>
 <p>Statistics:</p>
 <ul>
