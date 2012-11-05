@@ -27,7 +27,7 @@ class user {
       $this->data['session'] = $this->session;// use this session instead of old one.
       setcookie("session", $this->session,time()+60*60*24*52);
       $q = $this->db->query("UPDATE users SET session=".$this->db->quote($this->session)." WHERE uid = ".$this->db->quote($this->data['uid']) );
-      $this->alert->add("Login Successful","You have been logged in.","success");
+      $this->alert->add("Login Successful","Your account has been logged in.","success");
       return true;
     } else {
       $this->logout();
@@ -73,7 +73,7 @@ class user {
     }
     $hash = $this->password_hash_generate($password1);
     $q = $this->db->query("INSERT INTO users (username,password,repo_name) VALUES (".$this->db->quote($username).",".$this->db->quote($hash).",".$this->db->quote($repo_name).")");
-    $this->alert->add("Registration Successful","You have been properly registered!","success");
+    $this->alert->add("Registration Successful","Your account have been registered!","success");
     return true;
   }
 }
