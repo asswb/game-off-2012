@@ -11,7 +11,7 @@ if(isset($user->session)){
 ?>
 <h4>Working on issue `<?php echo $current_issue['name']; ?>`.</h4>
 <p id="issprg_text"><span id="issprg_counter"><?php echo $remain; ?></span> seconds remain.</p>
-<div id="issprg_bar_style" class="progress progress-striped">
+<div id="issprg_bar_style" class="progress progress-striped active">
   <div id="issprg_bar" class="bar" style="width: <?php echo $percent; ?>%;"><?php echo $percent; ?>%</div>
 </div>
 
