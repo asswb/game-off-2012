@@ -3,7 +3,7 @@ if(isset($user->session)){
 ?>
 <h2>Issues</h2>
 <?php
-  if($current_issue = $issues->get_user_issue()){
+  if($current_issue = $issues->get_current_issue()){
     echo "<pre>".print_r($current_issue,1)."</pre>";
   } else {
 ?>

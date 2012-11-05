@@ -13,7 +13,7 @@ class issues {
     $this->cron = $_cron;
   }
 
-  public function set_user_issue($iid=''){
+  public function set_current_issue($iid=''){
     if($iid == ''){
       $this->db->query("UPDATE users SET issue='0',issue_eta='0' WHERE uid=".$this->db->quote($this->uid));
     } else {
@@ -21,8 +21,15 @@ class issues {
       $this->db->query('UPDATE users SET issue='.$this->db->quote($iid).',issue_eta='.$this->db->quote($eta).' WHERE uid='.$this->db->quote($this->uid));
     }
   }
-  public function get_user_issue(){
+
+  public function get_current_issue(){
     return $this->get_issue($this->user->data['issue']);
+  }
+
+  public function get_user_issue($uiid){
+    $q = $this->db->query('SELECT * FROM user_table_issue WHERE uiid='.$this->db->quote($uiid));
+    $issues = $q->fetchAll(PDO::FETCH_ASSOC);
+    return $issue[0];
   }
 
   public function get_user_issues(){
@@ -105,7 +112,7 @@ class issues {
     <td>{$time}</td>
     <td>
       <form action="" method="POST" class="btn-group">
-        <input type="hidden" name="uuid" value="{$issue['uiid']}" />
+        <input type="hidden" name="uiid" value="{$issue['uiid']}" />
         <button class="btn" type="submit" title="Start" name="exe" value="issue-start"><i class="icon-play"></i></button>
         <button class="btn" type="submit" title="Wontfix" name="exe" value="issue-wontfix"><i class="icon-ban-circle"></i></button>
       </form>
