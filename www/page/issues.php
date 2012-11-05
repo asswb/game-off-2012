@@ -17,12 +17,12 @@ foreach($user_issues as $user_issue){
 ?>
   <tbody>
     <tr>
-      <td><?php echo print_r($user_issue,1); ?></td>
+      <td><pre><?php echo print_r($user_issue,1); ?></pre></td>
     </tr>
   </tbody>
 <?php
 }
-if($count == 0){
+if(count($user_issues) == 0){
 ?>
   <tbody>
     <tr>
