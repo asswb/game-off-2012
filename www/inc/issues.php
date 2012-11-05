@@ -125,7 +125,8 @@ class issues {
     $q = $this->db->query('SELECT *
       FROM user_issue_table,issue_table
       WHERE uid='.$this->db->quote($this->uid).'
-        AND user_issue_table.iid=issue_table.iid' );
+        AND user_issue_table.iid=issue_table.iid
+      ORDER BY issue_table.type ASC,issue_table.time ASC' );
     return $q->fetchAll(PDO::FETCH_ASSOC);
   }
 
