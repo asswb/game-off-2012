@@ -8,9 +8,11 @@ class alert {
     $output = '';
     foreach($this->alerts as $alert){
       $output .= '
-      <div class="alert alert-block'.( ($alert->type=='')?(''):(' alert-'.$alert->type) ).'">
-        <h4>'.$alert->title.'</h4>
-        '.$alert->message.'
+      <div class="row">
+        <div class="span6 alert alert-block'.( ($alert->type=='')?(''):(' alert-'.$alert->type) ).'">
+          <h4>'.$alert->title.'</h4>
+          '.$alert->message.'
+        </div>
       </div>';
     }
     return $output;
