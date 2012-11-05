@@ -14,6 +14,7 @@ if(DEBUG){
 require("inc/db.php");
 require("inc/alert.php");
 require("inc/user.php");
+require("inc/poormanscron.php");
 
 // Lazy Load everything else
 $incs = glob("inc/*.php");
