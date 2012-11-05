@@ -2,6 +2,10 @@
 
 $user = new user($db,$alert);
 
+if(DEBUG){
+  $alert->add('$user','<pre>'.print_r($user,1).'</pre>','info');
+}
+
 class user {
   public $data = null;
   public $alert = null;
