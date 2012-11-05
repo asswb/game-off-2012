@@ -9,7 +9,7 @@
     </tr>
   </thead>
 <?php
-$q = $db->query('select `username`,`repo_name`,(com*cbq) as score from users order by score DESC');
+$q = $db->query('SELECT `username`,`repo_name`,(com*cbq) AS score FROM users WHERE (com*cbq) > \'0\' ORDER BY score DESC');
 $rank = 0;
 while($row = $q->fetch(PDO::FETCH_ASSOC)){
   $rank++;
