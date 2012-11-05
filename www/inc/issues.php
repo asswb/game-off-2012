@@ -52,9 +52,19 @@ class issues {
     }
     $info = $this->cron->run($lastupdate,10);
     if($info->run > 0){
+      $q = $this->db->query("SELECT iid,chance FROM issue_table");
+      $new_issues = 0;
+      $cache = $q->fetchAll(PDO::FETCH_ASSOC);
       for($i=0;$i<$info->run;$i++){
+        foreach($cache as $test){
+          if(rand(0,100)<=$test['chance']){
+            // TODO: INSERT TICKED IF IT DOESN'T EXIST ALREADY.
+            $new_issues++;
+          }
+        }
       }
-      $this->alert->add("New Issues","__".$info->run."__ new issue(s) have been reported.","info");
+      $cache = null;
+      $this->alert->add("New Issues","$new_issues new issue".($new_issues>1?"s":"")." have been reported.","info");
       $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->user->data['uid']) );
     }
   }
