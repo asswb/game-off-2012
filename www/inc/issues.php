@@ -82,7 +82,7 @@ class issues {
           } elseif($new_cbq < 0){
             $new_cbq = 0;
           }
-          $cbq_change = "<p>&Delta; Code Base Quali ty: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".(SYS_BUG_CBQ_CHANGE*$bugs)."%]</p>";
+          $cbq_change = "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".(SYS_BUG_CBQ_CHANGE*$bugs)."%]</p>";
           $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).' WHERE uid='.$this->db->quote($this->uid));
         } else {
           $cbq_change = "";
