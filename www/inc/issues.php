@@ -16,9 +16,13 @@ class issues {
   public function set_current_issue($iid=''){
     if($iid == ''){
       $this->db->query("UPDATE users SET issue='0',issue_eta='0' WHERE uid=".$this->db->quote($this->uid));
+      $this->user->data['issue'] = 0;
+      $this->user->data['issue_eta'] = 0;
     } else {
       $eta = $this->calculate_eta($iid);
       $this->db->query('UPDATE users SET issue='.$this->db->quote($iid).',issue_eta='.$this->db->quote($eta).' WHERE uid='.$this->db->quote($this->uid));
+      $this->user->data['issue'] = $iid;
+      $this->user->data['issue_eta'] = $eta;
     }
   }
 
@@ -52,7 +56,7 @@ class issues {
     $q = $this->db->query('SELECT time FROM issue_table WHERE iid='.$this->db->quote($iid));
     $row = $q->fetch(PDO::FETCH_ASSOC);
     $time = $row['time'];
-    return $time/$cbq;
+    return $time/($cbq+1);
   }
 
   private function type_classes($type){
