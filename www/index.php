@@ -50,7 +50,7 @@ $header_pages = array();
 $header_pages['leaderboard'] = "Leaderboard";
 if(isset($user->session)){
   $header_pages['issues'] = "Issues";
-  $header_pages['logout'] = "Logout";
+  $header_pages['logout'] = "Logout [ ".$user->data['username']." ]";
 } else {
   $header_pages['register'] = "Register";
   $header_pages['login'] = "Login";
