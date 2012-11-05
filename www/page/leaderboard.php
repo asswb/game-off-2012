@@ -17,7 +17,7 @@ while($row = $q->fetch(PDO::FETCH_ASSOC)){
   $rank++;
 ?>
   <tbody>
-    <tr>
+    <tr<?php echo ($row['username'] == $user->data['username']?' class="info"':''); ?>>
       <td>#<?php echo $rank; ?></td>
       <td><?php echo $row['username']; ?></td>
       <td><?php echo $row['repo_name']; ?></td>
