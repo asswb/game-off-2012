@@ -8,7 +8,7 @@ function login_form(){
   <div class="control-group">
     <label class="control-label">Username</label>
     <div class="controls">
-      <input type="text" name="username" placeholder="Username" />
+      <input type="text" name="username" placeholder="Username"<?php if(isset($_POST['username'])){echo " value=\"".$_POST['username']."\"";} ?> />
     </div>
   </div>
   <div class="control-group">
