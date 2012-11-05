@@ -27,9 +27,11 @@ class issues {
   }
 
   public function get_user_issue($uiid){
-    $q = $this->db->query('SELECT * FROM user_table_issue WHERE uiid='.$this->db->quote($uiid));
+    $q = $this->db->query('SELECT * FROM user_issue_table WHERE uiid='.$this->db->quote($uiid));
     $issues = $q->fetchAll(PDO::FETCH_ASSOC);
-    return $issue[0];
+    if(count($issues)>0){
+      return $issues[0];
+    }
   }
 
   public function get_user_issues(){
