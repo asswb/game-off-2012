@@ -36,8 +36,11 @@ class issues {
          "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".($current_issue['delta_cbq']>=0?"+":"").$current_issue['delta_cbq']."%]</p>",
        "success");
 
-      // Clear issue
+      // Clear current issue
       $this->set_current_issue();
+
+      // Delete issue
+      $this->db->query("DELETE FROM user_issue_table WHERE iid=".$this->db->quote($current_issue['iid'])." and uid=".$this->db->quote($this->user->data['uid']));
     }
 
     // Check for new issues
