@@ -5,11 +5,13 @@
       <th>Rank</th>
       <th>User Name</th>
       <th>Repo Name</th>
+      <th>Community</th>
+      <th>Code Base Quality</th>
       <th>Score</th>
     </tr>
   </thead>
 <?php
-$q = $db->query('SELECT `username`,`repo_name`,(com*cbq) AS score FROM users WHERE (com*cbq) > \'0\' ORDER BY score DESC');
+$q = $db->query('SELECT username,repo_name,com,cbq,(com*cbq) AS score FROM users WHERE (com*cbq) > \'0\' ORDER BY score DESC');
 $rank = 0;
 while($row = $q->fetch(PDO::FETCH_ASSOC)){
   $rank++;
@@ -19,6 +21,12 @@ while($row = $q->fetch(PDO::FETCH_ASSOC)){
       <td>#<?php echo $rank; ?></td>
       <td><?php echo $row['username']; ?></td>
       <td><?php echo $row['repo_name']; ?></td>
+      <td><?php echo $row['com']; ?> people</td>
+      <td>
+        <div class="progress progress-success">
+          <div class="bar" style="width: <?php echo $row['cbq']*100; ?>%;"><?php echo ($row['cbq']*100); ?>%</div>
+        </div>
+      </td>
       <td><?php echo $row['score']; ?></td>
     </tr>
   </tbody>
