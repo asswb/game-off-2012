@@ -10,7 +10,5 @@ body {
 }
 
 #footer {
-  position:absolute;
-  left:16px;
-  bottom:0px;
+  padding-top: 64px;
 }
