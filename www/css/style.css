@@ -16,3 +16,7 @@ body {
 td .progress {
   margin-bottom: 0px;
 }
+
+tr.info {
+  color: white;
+}
