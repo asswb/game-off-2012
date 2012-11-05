@@ -1,5 +1,9 @@
 <?php
 
+if(isset($user->session)){
+  $cron = new poormanscron();
+}
+
 /* SAMPLE USAGE:
 
 echo "<pre>";

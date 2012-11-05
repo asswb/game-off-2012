@@ -13,6 +13,7 @@ if(DEBUG){
 // TODO: Make this list static once the MVP is over.
 require("inc/db.php");
 require("inc/alert.php");
+require("inc/user.php");
 
 // Lazy Load everything else
 $incs = glob("inc/*.php");

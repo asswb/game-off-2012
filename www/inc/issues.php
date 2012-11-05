@@ -1,5 +1,9 @@
 <?php
 
+if(isset($user->session)){
+  $issues = new issues($db,$user,$cron);
+}
+
 class issues {
   public $db;
   public function __construct($_db,$_user,&$_cron){

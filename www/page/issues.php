@@ -3,8 +3,6 @@ if(isset($user->session)){
 ?>
 <h2>Issues</h2>
 <?php
-  $cron = new poormanscron();
-  $issues = new issues($db,$user,$cron);
   if($current_issue = $issues->get_user_issue()){
     echo "<pre>".print_r($current_issue,1)."</pre>";
   } else {
