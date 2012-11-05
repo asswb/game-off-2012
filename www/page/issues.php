@@ -2,7 +2,6 @@
 if(isset($user->session)){
 $cron = new poormanscron();
 $issues = new issues($db,$user,$cron);
-echo "<pre>".print_r($issues,1)."</pre>";
 ?>
 <h2>Issues</h2>
 <table class="table table-striped">
@@ -14,13 +13,7 @@ echo "<pre>".print_r($issues,1)."</pre>";
 <?php
 $user_issues = $issues->get_user_issues();
 foreach($user_issues as $user_issue){
-?>
-  <tbody>
-    <tr>
-      <td><pre><?php echo print_r($user_issue,1); ?></pre></td>
-    </tr>
-  </tbody>
-<?php
+  echo $issues->render_teaser($user_issue);
 }
 if(count($user_issues) == 0){
 ?>

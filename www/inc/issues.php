@@ -44,4 +44,21 @@ class issues {
 
     return $row2['time']/$row['cbq'];
   }
+
+  public function render_teaser($issue){
+    return <<<EOT
+<tbody>
+  <tr>
+    <td>{$issue['name']}</td>
+    <td>{$issue['type']}</td>
+    <td>{$issue['time']}</td>
+    <td>{$issue['uiid']}</td>
+  </tr>
+</tbody>
+EOT;
+  }
+
+  public function render_full($issue){
+  
+  }
 }
