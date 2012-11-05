@@ -1,21 +1,44 @@
 <?php
 
 if(isset($user->session)){
-  $issues = new issues($db,$user,$cron);
+  $issues = new issues($db,$user,$cron,$alert);
 }
 
 class issues {
   public $db;
-  public function __construct($_db,$_user,&$_cron){
+  public function __construct($_db,$_user,&$_cron,&$_alert){
     $this->db = $_db;
     $this->user = $_user;
     $this->uid = $_user->data['uid'];
     $this->cron = $_cron;
+    $this->alert = $_alert;
+
+    // Check current issue
+    if($this->user->data['issue'] and $this->user->data['issue_eta'] < time()){
+      $this->set_current_issue();
+
+      $current_issue = $this->get_current_issue();
+
+      $new_cbq = $this->user->data['cbq']+($current_issue['delta_cbq']/100);
+      if($new_cbq > 1){
+        $new_cbq = 1;
+      } elseif($new_cbq < 0){
+        $new_cbq = 0;
+      }
+      $new_com = $this->user->data['com']+$current_issue['delta_com'];
+
+      $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).',com='.$this->db->quote($new_com).' WHERE uid='.$this->db->quote($this->uid));
+
+      $this->alert->add("Issue Complete","The issue has completed.","info");
+    }
+
+    // Check for new issues
+    //$this->alert->add("Poor mans cron","Running cron","info");
   }
 
   public function set_current_issue($iid=''){
     if($iid == ''){
-      $this->db->query("UPDATE users SET issue='0',issue_eta='0' WHERE uid=".$this->db->quote($this->uid));
+      $this->db->query('UPDATE users SET issue=\'0\',issue_eta=\'0\' WHERE uid='.$this->db->quote($this->uid));
       $this->user->data['issue'] = 0;
       $this->user->data['issue_eta'] = 0;
     } else {
@@ -107,7 +130,7 @@ class issues {
 
   public function render_teaser($issue){
     $type = '<span class="'.$this->type_classes($issue['type']).'">'.$issue['type'].'</span>';
-    $time = $this->stostr($this->calculate_eta($issue));
+    $time = $this->stostr(floor($this->calculate_eta($issue)));
     return <<<EOT
 <tbody>
   <tr>
