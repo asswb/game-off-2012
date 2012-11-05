@@ -18,10 +18,18 @@ if(isset($user->session)){
 <p>Welcome to the Beta version!</p>
 <p>Technologies used;</p>
 <ul>
-<li>PHP</li>
-<li>MySQL</li>
-<li>Twitter Bootstrap</li>
-<li>Bootswap</li>
+  <li>PHP</li>
+  <li>MySQL</li>
+  <li>Twitter Bootstrap</li>
+  <li>Bootswap</li>
+</ul>
+<p>Statistics:</p>
+<ul>
+<li>Total Users: <?php
+$q = $db->query("SELECT COUNT(uid) as total FROM `users`");
+$r = $q->fetchAll(PDO::FETCH_ASSOC);
+echo $r[0]['total'];
+?></li>
 </ul>
 <?php
   login_form();
