@@ -12,3 +12,7 @@ body {
 #footer {
   padding-top: 64px;
 }
+
+td .progress {
+  margin-bottom: 0px;
+}
