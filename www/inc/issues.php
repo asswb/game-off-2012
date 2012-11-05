@@ -50,7 +50,7 @@ class issues {
     } else {
       $lastupdate = $this->user->data['lastupdate'];
     }
-    $info = $this->cron->run($lastupdate,10);
+    $info = $this->cron->run($lastupdate,SYS_ISSUE_INTERVAL);
     if($info->run > 0){
       $q = $this->db->query("SELECT iid,chance FROM issue_table");
       $new_issues = 0;
@@ -58,14 +58,20 @@ class issues {
       for($i=0;$i<$info->run;$i++){
         foreach($cache as $test){
           if(rand(0,100)<=$test['chance']){
-            // TODO: INSERT TICKED IF IT DOESN'T EXIST ALREADY.
-            $new_issues++;
+            $q = $this->db->query("SELECT uiid FROM user_issue_table WHERE uid=".$this->db->quote($this->uid)." and iid=".$this->db->quote($test['iid']));
+            $r = $q->fetchAll(PDO::FETCH_ASSOC);
+            if(count($r)==0){
+              $this->db->query("INSERT INTO user_issue_table (uid,iid) VALUES (".$this->db->quote($this->uid).",".$this->db->quote($test['iid']).");");
+              $new_issues++;
+            }
           }
         }
       }
       $cache = null;
-      $this->alert->add("New Issues","$new_issues new issue".($new_issues>1?"s":"")." have been reported.","info");
-      $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->user->data['uid']) );
+      if($new_issues > 0){
+        $this->alert->add("New Issues","$new_issues new issue".($new_issues>1?"s":"")." have been reported.","info");
+      }
+      $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->uid) );
     }
   }
 
