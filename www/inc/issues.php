@@ -60,6 +60,7 @@ class issues {
   }
 
   public function stostr($secs) {
+    $r = '';
     if($secs>=86400){
       $days=floor($secs/86400);$secs=$secs%86400;
       $r=$days.' day';
@@ -102,18 +103,15 @@ class issues {
     <td>{$type}</td>
     <td>{$time}</td>
     <td>
-      <div class="btn-group">
-        <a class="btn" alt="Start" title="Start" href="?page=issues&uiid={$issue['uiid']}"><i class="icon-play"></i></a>
-        <a class="btn" alt="Delete" title="Delete" href="?page=issues&uiid={$issue['uiid']}"><i class="icon-ban-circle"></i></a>
-      </div>
-    
+      <form action="" method="POST" class="btn-group">
+        <input type="hidden" name="uuid" value="{$issue['uiid']}" />
+        <button class="btn" type="submit" title="Start" name="exe" value="issue-start"><i class="icon-play"></i></button>
+        <button class="btn" type="submit" title="Wontfix" name="exe" value="issue-wontfix"><i class="icon-ban-circle"></i></button>
+      </form>
     </td>
   </tr>
 </tbody>
 EOT;
   }
 
-  public function render_full($issue){
-  
-  }
 }
