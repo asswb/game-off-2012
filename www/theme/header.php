@@ -9,11 +9,6 @@
 
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -26,21 +21,21 @@
   </head>
 
   <body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="."><img src="bootstrap/ico/header.png" alt="GitHub Tycoon" /> GitHub Tycoon</a>
-          <ul class="nav">
-<?php foreach($header_pages as $rawp => $prettyp){ ?>
-            <li><a href="?page=<?php echo $rawp; ?>"><?php echo $prettyp; ?></a></li>
-<?php } ?>
-          </ul>
+    <div id="wrap">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="."><img src="bootstrap/ico/header.png" alt="GitHub Tycoon" /> GitHub Tycoon</a>
+            <ul class="nav">
+  <?php foreach($header_pages as $rawp => $prettyp){ ?>
+              <li><a href="?page=<?php echo $rawp; ?>"><?php echo $prettyp; ?></a></li>
+  <?php } ?>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-  <a href="https://github.com/asswb/game-off-2012"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1030" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <!-- <a href="https://github.com/asswb/game-off-2012"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1030" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a> -->
 
-    <div class="container">
+      <div class="container">
 

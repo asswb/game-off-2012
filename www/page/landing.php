@@ -3,7 +3,6 @@ if(isset($user->session)){
 ?>
 <h2>Welcome to GitHub Tycoon!</h2>
 <p>Welcome to the Beta version!</p>
-<p>This game is brought to you by <a href="https://github.com/josefnpat">josefnpat</a> and <a href="https://github.com/peterrstanley">peterrstanley</a>.</p>
 <p>Technologies used;</p>
 <ul>
 <li>PHP</li>

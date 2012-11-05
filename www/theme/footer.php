@@ -1,7 +1,13 @@
 
-
-    </div> <!-- /container -->
-
+      </div> <!-- /container -->
+    </div> <!-- /wrap -->
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">This game is brought to you by <a href="https://github.com/josefnpat">josefnpat</a> and <a href="https://github.com/peterrstanley">peterrstanley</a>. git-<?php echo `git log --pretty=%h -1`; ?></p>
+      </div>
+    </div>
+    
     <!-- Le javascript
     ================================================== -->
     <!--
