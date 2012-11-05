@@ -40,7 +40,9 @@ class issues {
       $this->set_current_issue();
 
       // Delete issue
-      $this->db->query("DELETE FROM user_issue_table WHERE iid=".$this->db->quote($current_issue['iid'])." and uid=".$this->db->quote($this->user->data['uid']));
+      if($current_issue['chance'] < 100){
+        $this->db->query("DELETE FROM user_issue_table WHERE iid=".$this->db->quote($current_issue['iid'])." and uid=".$this->db->quote($this->user->data['uid']));
+      }
     }
 
     // Check for new issues
