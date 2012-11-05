@@ -45,13 +45,61 @@ class issues {
     return $row2['time']/$row['cbq'];
   }
 
+  private function type_classes($type){
+    $t = "label";
+    if($type=="bug"){
+      $classes = "$t $t-important";
+    } elseif($type=="enhancement"){
+      $classes = "$t $t-success";
+    } elseif($type=="pull_request"){
+      $classes = "$t $t-info";
+    } else {
+      $classes = "$t";
+    }
+    return $classes;
+  }
+
+  public function stostr($secs) {
+    if($secs>=86400){
+      $days=floor($secs/86400);$secs=$secs%86400;
+      $r=$days.' day';
+      if($days<>1){
+        $r.='s';
+      }
+      $r.=' ';
+    }
+    if($secs>=3600){
+      $hours=floor($secs/3600);$secs=$secs%3600;
+      $r.=$hours.' hour';
+      if($hours<>1){
+        $r.='s';
+      }
+      $r.=' ';
+    }
+    if($secs>=60){
+      $minutes=floor($secs/60);$secs=$secs%60;
+      $r.=$minutes.' min';
+      if($minutes<>1){
+        $r.='s';
+      }
+      $r.=' ';
+    }
+    $r.=$secs.' sec';
+    if($secs<>1){
+      $r.='s';
+    }
+    return $r;
+  }
+
   public function render_teaser($issue){
+    $type = '<span class="'.$this->type_classes($issue['type']).'">'.$issue['type'].'</span>';
+    $time = $this->stostr($issue['time']);
     return <<<EOT
 <tbody>
   <tr>
     <td>{$issue['name']}</td>
-    <td>{$issue['type']}</td>
-    <td>{$issue['time']}</td>
+    <td>{$type}</td>
+    <td>{$time}</td>
     <td>{$issue['uiid']}</td>
   </tr>
 </tbody>
