@@ -19,10 +19,11 @@ class issues {
       $this->user->data['issue'] = 0;
       $this->user->data['issue_eta'] = 0;
     } else {
-      $eta = $this->calculate_eta($iid);
+      $issue = $this->get_issue($iid);
+      $eta = $this->calculate_eta($issue);
       $this->db->query('UPDATE users SET issue='.$this->db->quote($iid).',issue_eta='.$this->db->quote($eta).' WHERE uid='.$this->db->quote($this->uid));
       $this->user->data['issue'] = $iid;
-      $this->user->data['issue_eta'] = $eta;
+      $this->user->data['issue_eta'] = $eta+time();
     }
   }
 
@@ -51,11 +52,9 @@ class issues {
     return $q2->fetch(PDO::FETCH_ASSOC);
   }
 
-  private function calculate_eta($iid){
+  public function calculate_eta($issue){
     $cbq = $this->user->data['cbq'];
-    $q = $this->db->query('SELECT time FROM issue_table WHERE iid='.$this->db->quote($iid));
-    $row = $q->fetch(PDO::FETCH_ASSOC);
-    $time = $row['time'];
+    $time = $issue['time'];
     return $time/($cbq+1);
   }
 
