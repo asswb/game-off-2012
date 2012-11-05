@@ -41,7 +41,19 @@ class issues {
     }
 
     // Check for new issues
-    //$this->alert->add("Poor mans cron","Running cron","info");
+    if($this->user->data['lastupdate']==0){
+      $lastupdate = time();
+      $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($lastupdate)." WHERE uid=".$this->db->quote($this->user->data['uid']) );
+    } else {
+      $lastupdate = $this->user->data['lastupdate'];
+    }
+    $info = $this->cron->run($lastupdate,10);
+    if($info->run > 0){
+      for($i=0;$i<$info->run;$i++){
+      }
+      $this->alert->add("New Issues","__".$info->run."__ new issue(s) have been reported.","info");
+      $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->user->data['uid']) );
+    }
   }
 
   public function set_current_issue($iid=''){
