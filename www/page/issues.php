@@ -1,9 +1,14 @@
 <?php
 if(isset($user->session)){
-$cron = new poormanscron();
-$issues = new issues($db,$user,$cron);
 ?>
 <h2>Issues</h2>
+<?php
+  $cron = new poormanscron();
+  $issues = new issues($db,$user,$cron);
+  if($current_issue = $issues->get_user_issue()){
+    echo "<pre>".print_r($current_issue,1)."</pre>";
+  } else {
+?>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,11 +20,11 @@ $issues = new issues($db,$user,$cron);
     </tr>
   </thead>
 <?php
-$user_issues = $issues->get_user_issues();
-foreach($user_issues as $user_issue){
-  echo $issues->render_teaser($user_issue);
-}
-if(count($user_issues) == 0){
+    $user_issues = $issues->get_user_issues();
+    foreach($user_issues as $user_issue){
+      echo $issues->render_teaser($user_issue);
+    }
+    if(count($user_issues) == 0){
 ?>
   <tbody>
     <tr>
@@ -27,10 +32,11 @@ if(count($user_issues) == 0){
     </tr>
   </tbody>
 <?php
-}
+    }
 ?>
 </table>
 <?php
+  }
 } else {
   login_form();
 }

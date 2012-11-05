@@ -18,7 +18,7 @@ class issues {
     }
   }
   public function get_user_issue(){
-    return $this->get_issue($this->user['issue']);
+    return $this->get_issue($this->user->data['issue']);
   }
 
   public function get_user_issues(){
