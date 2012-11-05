@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 CREATE TABLE IF NOT EXISTS `user_issue_table` (
   `uiid` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
+  `iid` int(11) NOT NULL,
   UNIQUE KEY `uiid` (`uiid`,`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
