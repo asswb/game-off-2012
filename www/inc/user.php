@@ -31,7 +31,7 @@ class user {
       return true;
     } else {
       $this->logout();
-      $this->alert->add("Login Failed","Either your username or password are incorrect.","info");
+      $this->alert->add("Login Failed","Either the username or password is incorrect.","info");
       return false;
     }
   }
@@ -48,7 +48,7 @@ class user {
       $this->data = $r[0];
     } else {
       $this->logout();
-      $this->alert->add("Session Expired","Either you logged in elsewhere, or your session has expired.","info");
+      $this->alert->add("Session Expired","The session has expired. Please log back in.","info");
     }
   }
   public function register($username,$password1,$password2,$repo_name){
@@ -64,7 +64,7 @@ class user {
       return false;
     }
     if($password1 != $password2){
-      $this->alert->add("Password Mismatch","The passwords you supplied do not match.","info");
+      $this->alert->add("Password Mismatch","The passwords supplied do not match.","info");
       return false;
     }
     if(!preg_match("@^[a-zA-Z0-9\_\s]{2,64}$@",$repo_name)){
