@@ -15,8 +15,6 @@ class issues {
 
     // Check current issue
     if($this->user->data['issue'] and $this->user->data['issue_eta'] < time()){
-      $this->set_current_issue();
-
       $current_issue = $this->get_current_issue();
 
       $new_cbq = $this->user->data['cbq']+($current_issue['delta_cbq']/100);
@@ -25,11 +23,21 @@ class issues {
       } elseif($new_cbq < 0){
         $new_cbq = 0;
       }
-      $new_com = $this->user->data['com']+$current_issue['delta_com'];
+
+      $new_com = ceil($this->user->data['com']*(1+$current_issue['delta_com']/100));
+      if($new_com < 1){
+        $new_com = 1;
+      }
 
       $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).',com='.$this->db->quote($new_com).' WHERE uid='.$this->db->quote($this->uid));
 
-      $this->alert->add("Issue Complete","The issue has completed.","info");
+      $this->alert->add("Issue Complete","<p>The issue has completed.</p>".
+         "<p>&Delta; Community: ".$this->user->data['com']." &rarr; ".$new_com." people [".($current_issue['delta_com']>=0?"+":"").$current_issue['delta_com']."%]</p>".
+         "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".($current_issue['delta_cbq']>=0?"+":"").$current_issue['delta_cbq']."%]</p>",
+       "success");
+
+      // Clear issue
+      $this->set_current_issue();
     }
 
     // Check for new issues
