@@ -52,6 +52,18 @@ class user {
     }
   }
   public function register($username,$password1,$password2,$repo_name){
+    $check_username = $this->validate_username($username);
+    $check_password = $this->validate_username($password);
+    if($check_username and $check_password){
+      $hash = $this->password_hash_generate($password1);
+      $q = $this->db->query("INSERT INTO users (username,password,repo_name) VALUES (".$this->db->quote($username).",".$this->db->quote($hash).",".$this->db->quote($repo_name).")");
+      $this->alert->add("Registration Successful","Your account have been registered!","success");
+      return true;
+    }
+    return false;
+  }
+
+  public function validate_username($username){
     // Check username; 4-32 alphanumeric characters and numbers with underscores
     if(!preg_match("@^[a-zA-Z0-9\_]{4,32}$@",$username)){
       $this->alert->add("Invalid Username","Usernames must be 4 to 32 characters and may only contain a-z, A-Z, 0-9 and `_`.","info");
@@ -63,17 +75,17 @@ class user {
       $this->alert->add("Username Already Exists","This username has already been registered.","info");
       return false;
     }
+    return true;
+  }
+  public function validate_password($password1,$password2){
+    if($password1 == ""){
+      $this->alert->add("Password Blank","The password cannot be blank.","info");
+      return false;
+    }
     if($password1 != $password2){
       $this->alert->add("Password Mismatch","The passwords supplied do not match.","info");
       return false;
     }
-    if(!preg_match("@^[a-zA-Z0-9\_\s]{2,64}$@",$repo_name)){
-      $this->alert->add("Invalid Repository Name","Repository names must be 4 to 64 characters and may only contain a-z, A-Z, 0-9, ` ` and `_`.","info");
-      return false;
-    }
-    $hash = $this->password_hash_generate($password1);
-    $q = $this->db->query("INSERT INTO users (username,password,repo_name) VALUES (".$this->db->quote($username).",".$this->db->quote($hash).",".$this->db->quote($repo_name).")");
-    $this->alert->add("Registration Successful","Your account have been registered!","success");
     return true;
   }
 }

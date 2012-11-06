@@ -85,13 +85,22 @@ function setting_form(){
   ?>
 <h2>Settings</h2>
 <form class="form-horizontal hero-center" method="POST" action="">
-  <input type="hidden" id="exe" name="exe" value="settings-update" />
+  <input type="hidden" id="exe" name="exe" value="settings-update-repo" />
   <div class="control-group">
     <label class="control-label">Repo Name:</label>
     <div class="controls">
       <input type="text" id="repo_name" name="repo_name" value="<?php echo (isset($_POST['repo_name'])?$_POST['repo_name']:$user->data['repo_name']); ?>" />
     </div>
   </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </div>
+</form>
+
+<form class="form-horizontal hero-center" method="POST" action="">
+  <input type="hidden" id="exe" name="exe" value="settings-update-password" />
   <div class="control-group">
     <label class="control-label">Current Password:</label>
     <div class="controls">
