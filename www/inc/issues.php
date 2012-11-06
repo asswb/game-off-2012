@@ -17,9 +17,11 @@ class issues {
     if($this->user->data['issue'] and $this->user->data['issue_eta'] < time()){
       $current_issue = $this->get_current_issue();
 
+      $bugs = $this->get_user_bugs_count();
+
       $new_cbq = $this->user->data['cbq']+($current_issue['delta_cbq']/100);
-      if($new_cbq > 1){
-        $new_cbq = 1;
+      if($new_cbq > 1 + SYS_BUG_CBQ_CHANGE/100*$bugs ){
+        $new_cbq = 1 + SYS_BUG_CBQ_CHANGE/100*$bugs;
       } elseif($new_cbq < 0){
         $new_cbq = 0;
       }
@@ -56,7 +58,6 @@ class issues {
     if($info->run > 0){
       $q = $this->db->query("SELECT iid,chance FROM issue_table");
       $new_issues = 0;
-      $bugs = 0;
       $cache = $q->fetchAll(PDO::FETCH_ASSOC);
       for($i=0;$i<$info->run;$i++){
         foreach($cache as $test){
@@ -67,9 +68,6 @@ class issues {
               $this->db->query("INSERT INTO user_issue_table (uid,iid) VALUES (".$this->db->quote($this->uid).",".$this->db->quote($test['iid']).");");
               $q = $this->db->query("SELECT type FROM issue_table WHERE iid=".$this->db->quote($test['iid']));
               $r = $q->fetchAll(PDO::FETCH_ASSOC);
-              if($r[0]['type']=="bug"){
-                $bugs++;
-              }
               $new_issues++;
             }
           }
@@ -77,10 +75,11 @@ class issues {
       }
       $cache = null;
       if($new_issues > 0){
-        if($bugs){
+        $bugs = $this->get_user_bugs_count();
+        if($bugs > 0){
           $new_cbq = $this->user->data['cbq']+(SYS_BUG_CBQ_CHANGE*$bugs/100);
-          if($new_cbq > 1){
-            $new_cbq = 1;
+          if($new_cbq > 1 + SYS_BUG_CBQ_CHANGE/100*$bugs){
+            $new_cbq = 1 + SYS_BUG_CBQ_CHANGE/100*$bugs;
           } elseif($new_cbq < 0){
             $new_cbq = 0;
           }
@@ -94,7 +93,11 @@ class issues {
       $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->uid) );
     }
   }
-
+  private function get_user_bugs_count(){
+    $q = $this->db->query("SELECT count(issue_table.iid) as count FROM issue_table,user_issue_table WHERE issue_table.iid=user_issue_table.iid and type='bug' and user_issue_table.uid=".$this->db->quote($this->uid));
+    $r = $q->fetchAll(PDO::FETCH_ASSOC);
+    return $r[0]['count'];
+  }
   public function set_current_issue($iid=''){
     if($iid == ''){
       $this->db->query('UPDATE users SET issue=\'0\',issue_eta=\'0\' WHERE uid='.$this->db->quote($this->uid));
