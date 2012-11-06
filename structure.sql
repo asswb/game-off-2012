@@ -35,12 +35,23 @@ CREATE TABLE IF NOT EXISTS `issue_table` (
   `delta_cbq` int(11) NOT NULL,
   `chance` int(3) NOT NULL,
   UNIQUE KEY `iid` (`iid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `issue_table`
 --
 
+INSERT INTO `issue_table` (`iid`, `name`, `description`, `type`, `time`, `delta_com`, `delta_cbq`, `chance`) VALUES
+(1, 'Simple Bug', 'This one isn''t very hard, and not very rewarding.', 'bug', 20, 1, 2, 8),
+(2, 'Intermediate Bug', 'This one is harder.', 'bug', 40, 3, 2, 4),
+(3, 'Hard Bug', 'This is a tricky one. Better hunker down.', 'bug', 60, 5, 2, 2),
+(4, 'Brutal Bug', 'This bug is super hard, oh god no!', 'bug', 80, 7, 2, 1),
+(5, 'Can you add this feature?', 'My company would switch if you had this feature!', 'enhancement', 20, 10, -2, 2),
+(6, 'Has anyone really been far even as decided to use even go want t', '<pre>git rm -rf *\r\ngit commit -m "Fixed all bugs"\r\ngit push</pre>', 'pull_request', 2, -10, -10, 1),
+(7, 'Hey, I found a bug!', 'Attached is a diff.', 'pull_request', 5, 10, -1, 1),
+(8, 'Hey, you''re missing this feature!', 'Here''s a patch!', 'pull_request', 5, 8, -2, 2),
+(9, 'Code Rebase', 'Rewrite major parts of the core and update to newest specifications.', 'enhancement', 240, 10, -2, 100),
+(10, 'Refactor', 'Refactor a segment of the code.', 'enhancement', 60, 0, 2, 100);
 
 -- --------------------------------------------------------
 
