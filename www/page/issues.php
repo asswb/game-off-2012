@@ -14,7 +14,13 @@ if(isset($user->session)){
 <div id="issprg_bar_style" class="progress progress-striped active">
   <div id="issprg_bar" class="bar" style="width: <?php echo $percent; ?>%;"><?php echo $percent; ?>%</div>
 </div>
-
+<div>
+  <form action="<? echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <input type="hidden" id="page" name="page" value="issues" />
+    <input type="hidden" id="exe" name="exe" value="issue-cancel" />
+    <input type="submit" value="Cancel Issue" />
+  </form>
+</div>
 <script>
   var issprg_seconds = <?php echo $current; ?>;
 
