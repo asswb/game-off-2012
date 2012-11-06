@@ -1,0 +1,3 @@
+<?php
+  setting_form();
+?>
