@@ -79,3 +79,46 @@ function logout_form(){
 </form>
   <?php
 }
+
+function setting_form(){
+  global $user;
+  global $db;
+  global $alert;
+  $setting = new Settings($db,$user,$alert);
+  ?>
+<h2>Settings</h2>
+<form class<form class="form-horizontal hero-center" method="POST" action="">
+  <input type="hidden" id="exe" name="exe" value="settings-update" />
+  <input type="hidden" id="page" name="page" value="settings" />
+  <div class="control-group">
+    <label class="control-label">Repo Name:</label>
+    <div class="controls">
+      <input type="text" id="repo_name" name="repo_name" value="<?php echo $setting->get_repo_name(); ?>" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Current Password:</label>
+    <div class="controls">
+      <input type="password" id="cur_password" name="cur_password" value="" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">New Password:</label>
+    <div class="controls">
+      <input type="password" id="new_password1" name="new_password1" value="" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Repeat New Password:</label>
+    <div class="controls">
+      <input type="password" id="new_password2" name="new_password2" value="" />
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+  </div>
+</form>
+  <?php
+}
