@@ -12,8 +12,7 @@ class settings {
   }
 
   public function update_repo_name($new_name){
-    $check_repo_name = $this->validate_repo_name($new_name);
-    if($check_repo_name){
+    if($this->validate_repo_name($new_name)){
       $q = $this->db->query("UPDATE users SET repo_name=".$this->db->quote($new_name)." WHERE uid=".$this->db->quote($this->user->data['uid']));
       $this->alert->add("Repository Updated","Your Repository Name has been updated.","success");
       return true;
@@ -26,8 +25,7 @@ class settings {
       $this->alert->add("Invalid Password","Current password does not match.","info");
       return false;
     }
-    $check_password = $this->user->validate_password($new1,$new2);
-    if(!$check_password){
+    if(!$this->user->validate_password($new1,$new2)){
       $this->alert->add("Mismatch Passwords","New passwords do not match.","info");
       return false;
     }
