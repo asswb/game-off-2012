@@ -8,5 +8,6 @@
 # Installation (Linux)
 
 1. Clone this repo to your system, and softlink (`ln -s`) `/www` to your 80 (e.g. `/var/www/ght`). If you bump into a 403 permission issue, make sure all of the parent directories to the cloned directory, including www have the x permission (e.g.chmod a+x). Furthermore, you need +FollowSymLinks. (Alternatively, you could just move the contents of www into your /var/www folder.
-2. Create a table and user, and import `/structure.sql` into that table.
-3. Copy `/config.sample.php` to `/config.php` and insert your database information along with a sufficiently strong and random salt.
+2. Run `./structure` so you can track when to update your MySQL structure. After the alpha release, we will write patches.
+3. Create a table and user, and import `/structure.sql` into that table.
+4. Copy `/config.sample.php` to `/config.php` and insert your database information along with a sufficiently strong and random salt.
