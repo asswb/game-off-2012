@@ -54,6 +54,7 @@ $header_pages = array();
 $header_pages['leaderboard'] = "Leaderboard";
 if(isset($user->session)){
   $header_pages['issues'] = "Issues <span class=\"badge badge-inverse\">".(isset($issues)?$issues->count():"?")."</span>";
+  $header_pages['settings'] = "Settings";
   $header_pages['logout'] = "Logout <span class=\"badge badge-inverse\">".$user->data['username']."</span>";
 } else {
   $header_pages['register'] = "Register";
