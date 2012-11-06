@@ -13,7 +13,7 @@ if(file_exists($file)){
 }
 
 if($stored_hash == $current_hash){
-  echo "The `structure.sql` has not been updated since the last time you ran this script.\n";
+  echo "`structure.sql` has not been updated since the last time you ran this script.\n";
 } else {
   echo "The `structure.sql` has been updated.\n";
   echo "Drop your tables, and upload the current `structure.sql` now.\n";
