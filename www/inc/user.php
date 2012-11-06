@@ -13,7 +13,7 @@ class user {
       $this->load_user();
     }
   }
-  private function password_hash_generate($password){
+  public function password_hash_generate($password){
     return sha1($password.SYS_SALT);
   }
   public function login($username,$password){

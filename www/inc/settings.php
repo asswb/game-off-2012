@@ -25,7 +25,7 @@ class settings {
   }
 
   public function update_user_password($cur,$new1,$new2){
-    if($this->user->data['password'] != $this->password_hash_generate($cur)){
+    if($this->user->data['password'] != $this->user->password_hash_generate($cur)){
       $this->alert->add("Invalid Password","Current password does not match.","info");
       return false;
     }
@@ -33,12 +33,8 @@ class settings {
       $this->alert->add("Mismatch Passwords","New passwords do not match.","info");
       return false;
     }
-    $q = $this->db->query("UPDATE users SET password=".$this->db->quote($this->password_hash_generate($new1))." WHERE uid=".$this->db->quote($this->user->data['uid']));
+    $q = $this->db->query("UPDATE users SET password=".$this->db->quote($this->user->password_hash_generate($new1))." WHERE uid=".$this->db->quote($this->user->data['uid']));
     $this->alert->add("Password Updated","Your password has been updated.","success");
     return true;
-  }
-
-  private function password_hash_generate($password){
-    return sha1($password.SYS_SALT);
   }
 }
