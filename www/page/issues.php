@@ -15,10 +15,10 @@ if(isset($user->session)){
   <div id="issprg_bar" class="bar" style="width: <?php echo $percent; ?>%;"><?php echo $percent; ?>%</div>
 </div>
 <div>
-  <form action="<? echo $_SERVER['PHP_SELF']; ?>?page=issues" method="POST">
+  <form action="" method="POST">
     <input type="hidden" id="page" name="page" value="issues" />
     <input type="hidden" id="exe" name="exe" value="issue-cancel" />
-    <input type="submit" value="Cancel Issue" />
+    <input class="btn btn-danger" type="submit" value="Cancel Issue" />
   </form>
 </div>
 <script>
