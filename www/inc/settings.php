@@ -1,16 +1,14 @@
 <?php
 
+if(isset($user->session)){
+  $setting = new Settings($db,$user,$alert);
+}
+
 class settings {
   public function __construct($_db,$_user,$_alert){
     $this->db = $_db;
     $this->user = $_user;
     $this->alert = $_alert;
-  }
-
-  public function get_repo_name(){
-    $q = $this->db->query("SELECT repo_name FROM users WHERE uid=".$this->db->quote($this->user->data['uid']));
-    $rs = $q->fetchAll(PDO::FETCH_ASSOC);
-    return $rs[0]['repo_name'];
   }
 
   public function update_repo_name($new_name){

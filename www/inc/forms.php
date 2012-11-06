@@ -82,18 +82,14 @@ function logout_form(){
 
 function setting_form(){
   global $user;
-  global $db;
-  global $alert;
-  $setting = new Settings($db,$user,$alert);
   ?>
 <h2>Settings</h2>
-<form class<form class="form-horizontal hero-center" method="POST" action="">
+<form class="form-horizontal hero-center" method="POST" action="">
   <input type="hidden" id="exe" name="exe" value="settings-update" />
-  <input type="hidden" id="page" name="page" value="settings" />
   <div class="control-group">
     <label class="control-label">Repo Name:</label>
     <div class="controls">
-      <input type="text" id="repo_name" name="repo_name" value="<?php echo $setting->get_repo_name(); ?>" />
+      <input type="text" id="repo_name" name="repo_name" value="<?php echo (isset($_POST['repo_name'])?$_POST['repo_name']:$user->data['repo_name']); ?>" />
     </div>
   </div>
   <div class="control-group">
