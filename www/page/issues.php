@@ -16,9 +16,8 @@ if(isset($user->session)){
 </div>
 <div>
   <form action="" method="POST">
-    <input type="hidden" id="page" name="page" value="issues" />
-    <input type="hidden" id="exe" name="exe" value="issue-cancel" />
-    <input class="btn btn-danger" type="submit" value="Cancel Issue" />
+    <input type="hidden" name="exe" value="issue-cancel" />
+    <input class="btn btn-danger" type="submit" value="Cancel" />
   </form>
 </div>
 <script>
