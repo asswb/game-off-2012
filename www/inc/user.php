@@ -52,7 +52,7 @@ class user {
     }
   }
   public function register($username,$password1,$password2,$repo_name){
-    if($this->validate_username($username) and $this->validate_username($password)){
+    if($this->validate_username($username) and $this->validate_password($password1,$password2)){
       $hash = $this->password_hash_generate($password1);
       $q = $this->db->query("INSERT INTO users (username,password,repo_name) VALUES (".$this->db->quote($username).",".$this->db->quote($hash).",".$this->db->quote($repo_name).")");
       $this->alert->add("Registration Successful","Your account have been registered!","success");
