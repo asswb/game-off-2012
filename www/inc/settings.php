@@ -20,7 +20,6 @@ class settings {
         return false;
       } else {
         $q = $this->db->query("UPDATE users SET repo_name=".$this->db->quote($new_name)." WHERE uid=".$this->db->quote($this->user->data['uid']));
-        var_dump($this->db->errorInfo());
         $this->alert->add("Repository Updated","Your Repository Name has been updated.","success");
         return true;
       }
