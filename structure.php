@@ -1,0 +1,21 @@
+#!/usr/bin/php
+<?php
+$current_hash = `git log --pretty=format:%H -1 structure.sql`;
+$file = ".structure";
+if(file_exists($file)){
+  $stored_hash = file_get_contents($file);
+} else {
+  echo "This is the first time you've run this script.\n";
+  echo "Drop your tables, and upload the current `structure.sql` now.\n";
+  echo "This script will assume that the current version is the newest.\n";
+  file_put_contents($file,$current_hash);
+  $stored_hash = $current_hash;
+}
+
+if($stored_hash == $current_hash){
+  echo "The `structure.sql` has not been updated since the last time you ran this script.\n";
+} else {
+  echo "The `structure.sql` has been updated.\n";
+  echo "Drop your tables, and upload the current `structure.sql` now.\n";
+  file_put_contents($file,$current_hash);
+}
