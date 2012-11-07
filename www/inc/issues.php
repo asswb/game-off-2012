@@ -60,6 +60,7 @@ class issues {
     $info = $this->cron->run($lastupdate,SYS_ISSUE_INTERVAL);
     if($info->run > 0){
       $q = $this->db->query("SELECT iid,chance FROM issue_table");
+      $new_bugs = 0;
       $new_issues = 0;
       $cache = $q->fetchAll(PDO::FETCH_ASSOC);
       for($i=0;$i<$info->run;$i++){
@@ -71,6 +72,9 @@ class issues {
               $this->db->query("INSERT INTO user_issue_table (uid,iid) VALUES (".$this->db->quote($this->uid).",".$this->db->quote($test['iid']).");");
               $q = $this->db->query("SELECT type FROM issue_table WHERE iid=".$this->db->quote($test['iid']));
               $r = $q->fetchAll(PDO::FETCH_ASSOC);
+              if($r[0]['type']=="bug"){
+                $new_bugs++;
+              }
               $new_issues++;
             }
           }
@@ -78,21 +82,20 @@ class issues {
       }
       $cache = null;
       if($new_issues > 0){
-        $bugs = $this->get_user_bugs_count();
-        if($bugs > 0){
-          $new_cbq = $this->user->data['cbq']+(SYS_BUG_CBQ_CHANGE*$bugs/100);
-          if($new_cbq > 1 + SYS_BUG_CBQ_CHANGE/100*$bugs){
-            $new_cbq = 1 + SYS_BUG_CBQ_CHANGE/100*$bugs;
+        if($new_bugs > 0){
+          $new_cbq = $this->user->data['cbq']+(SYS_BUG_CBQ_CHANGE*$new_bugs/100);
+          if($new_cbq > 1 + SYS_BUG_CBQ_CHANGE/100*$new_bugs){
+            $new_cbq = 1 + SYS_BUG_CBQ_CHANGE/100*$new_bugs;
           } elseif($new_cbq < 0){
             $new_cbq = 0;
           }
-          $cbq_change = "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".(SYS_BUG_CBQ_CHANGE*$bugs)."%]</p>";
+          $cbq_change = "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".(SYS_BUG_CBQ_CHANGE*$new_bugs)."%]</p>";
           $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).' WHERE uid='.$this->db->quote($this->uid));
         } else {
           $cbq_change = "";
         }
         $this->alert->add("New Issues","<p>$new_issues new issue".($new_issues>1?"s":"")." have been reported.</p>".$cbq_change,"info");
-        if($bugs > 0){
+        if($new_bugs > 0){
           $this->user->data['cbq'] = $new_cbq;
         }
       }
