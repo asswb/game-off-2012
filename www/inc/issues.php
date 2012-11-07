@@ -32,13 +32,14 @@ class issues {
       }
 
       $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).',com='.$this->db->quote($new_com).' WHERE uid='.$this->db->quote($this->uid));
-      $this->user->data['cbq'] = $new_cbq;
-      $this->user->data['com'] = $new_com;
 
       $this->alert->add("Issue Complete","<p>The issue has completed.</p>".
          "<p>&Delta; Community: ".$this->user->data['com']." &rarr; ".$new_com." people [".($current_issue['delta_com']>=0?"+":"").$current_issue['delta_com']."%]</p>".
          "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".($current_issue['delta_cbq']>=0?"+":"").$current_issue['delta_cbq']."%]</p>",
        "success");
+
+      $this->user->data['cbq'] = $new_cbq;
+      $this->user->data['com'] = $new_com;
 
       // Clear current issue
       $this->set_current_issue();
@@ -87,11 +88,13 @@ class issues {
           }
           $cbq_change = "<p>&Delta; Code Base Quality: ".($this->user->data['cbq']*100)." &rarr; ".($new_cbq*100)."% [".(SYS_BUG_CBQ_CHANGE*$bugs)."%]</p>";
           $q = $this->db->query('UPDATE users SET cbq='.$this->db->quote($new_cbq).' WHERE uid='.$this->db->quote($this->uid));
-          $this->user->data['cbq'] = $new_cbq;
         } else {
           $cbq_change = "";
         }
         $this->alert->add("New Issues","<p>$new_issues new issue".($new_issues>1?"s":"")." have been reported.</p>".$cbq_change,"info");
+        if($bugs > 0){
+          $this->user->data['cbq'] = $new_cbq;
+        }
       }
       $this->db->query("UPDATE users SET lastupdate=".$this->db->quote($info->lastrun)." WHERE uid=".$this->db->quote($this->uid) );
     }
