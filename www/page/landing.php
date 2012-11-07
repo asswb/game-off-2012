@@ -3,12 +3,16 @@ if(isset($user->session)){
 ?>
 <h2><?php echo $user->data['repo_name']; ?></h2>
 <dl class="dl-horizontal">
+  <dt>Score</dt>
+  <dd><?php echo $user->data['com']*$user->data['cbq'];?></dd>
   <dt>Community</dt>
   <dd><?php echo $user->data['com'];?> people</dd>
   <dt>Code Base Quality</dt>
-  <dd><?php echo $user->data['cbq']*100;?>%</dd>
-  <dt>Score</dt>
-  <dd><?php echo $user->data['com']*$user->data['cbq'];?></dd>
+  <dd>
+    <div class="progress progress-success span2 landing_cbq">
+      <div class="bar" style="width: <?php echo $user->data['cbq']*100;?>%;"><?php echo $user->data['cbq']*100;?>%</div>
+    </div>
+  </dd>
 </dl>
 <?php
 } else {
