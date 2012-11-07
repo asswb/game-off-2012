@@ -2,7 +2,7 @@
 
 ## Demo
 
-Check out the demo: [http://githubtycoon.ftp.sh/](http://githubtycoon.ftp.sh/).
+Check out the demo: [http://githubtycoon.ftp.sh](http://githubtycoon.ftp.sh).
 
 ## Requirements
 
