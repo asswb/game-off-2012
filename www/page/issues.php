@@ -15,7 +15,7 @@ if(isset($user->session)){
   <div id="issprg_bar" class="bar" style="width: <?php echo $percent; ?>%;"><?php echo $percent; ?>%</div>
 </div>
 <div>
-  <form action="" method="POST">
+  <form id="cancel_form" action="" method="POST">
     <input type="hidden" name="exe" value="issue-cancel" />
     <input class="btn btn-danger" type="submit" value="Cancel" />
   </form>
@@ -34,6 +34,7 @@ if(isset($user->session)){
       document.getElementById("issprg_text").innerHTML='Issue Complete';
       document.getElementById("issprg_bar_style").className='progress progress-success progress-striped';
       document.getElementById("issprg_bar").style.width='100%';
+      document.getElementById("cancel_form").style.display='none';
     }
   }
   issprg_display();
