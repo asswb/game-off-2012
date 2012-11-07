@@ -1,13 +1,15 @@
-## GitHub Tycoon
+# GitHub Tycoon
 
-Check out the demo [here](50.116.63.25/ght)!
+## Demo
 
-# Requirements
+Check out the demo: [http://githubtycoon.ftp.sh/](http://githubtycoon.ftp.sh/).
+
+## Requirements
 
 * PHP (Tested on [5.3.2-1ubuntu4.18 & 5.3.10-1ubuntu3.4](https://launchpad.net/php/+packages))
 * MySQL (Tested on [5.1.66-0ubuntu0.10.04.1 & 5.5.28-0ubuntu0.12.04.2](https://launchpad.net/mysql-server/+packages)) 
 
-# Installation (Linux)
+## Installation (Linux)
 
 1. Clone this repo to your system, and softlink (`ln -s`) `/www` to your 80 (e.g. `/var/www/ght`). If you bump into a 403 permission issue, make sure all of the parent directories to the cloned directory, including www have the x permission (e.g.chmod a+x). Furthermore, you need +FollowSymLinks. (Alternatively, you could just move the contents of www into your /var/www folder.
 2. Run `./structure` so you can track when to update your MySQL structure. After the alpha release, we will write patches.
