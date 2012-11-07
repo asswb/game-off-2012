@@ -11,12 +11,11 @@
         </p>
 <?php
         if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == "on") {
-          echo "<p class='muted credit'>You are running the this site over https.</p>";
+          echo "<p class='muted credit'>https &mdash; on</p>";
         } else {
           echo "<p class='muted credit'><a href='https://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."'>Visit the https (self signed) version of this site.</a></p>";
         }
 ?>
-        <p><a 
       </div>
     </div>
 
