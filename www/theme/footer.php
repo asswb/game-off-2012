@@ -9,6 +9,14 @@
           git-<?php echo `git log --pretty=%h -1`; ?> &mdash;
           v<?php echo `git log --pretty=format:'' | wc -l`; ?>
         </p>
+<?php
+        if (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] == "on") {
+          echo "<p class='muted credit'>You are running the this site over https.</p>";
+        } else {
+          echo "<p class='muted credit'><a href='https://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."'>Visit the https (self signed) version of this site.</a></p>";
+        }
+?>
+        <p><a 
       </div>
     </div>
 
@@ -31,4 +39,3 @@
     -->
   </body>
 </html>
-
