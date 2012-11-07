@@ -35,8 +35,8 @@ class settings {
   }
 
   public function validate_repo_name($repo_name){
-    if(!preg_match("@^[a-zA-Z0-9\_\s]{2,64}$@",$repo_name)){
-      $this->alert->add("Invalid Repository Name","Repository names must be 4 to 64 characters and may only contain a-z, A-Z, 0-9, ` ` and `_`.","info");
+    if(!preg_match("@^[a-zA-Z0-9\_\s]{2,32}$@",$repo_name)){
+      $this->alert->add("Invalid Repository Name","Repository names must be 4 to 32 characters and may only contain a-z, A-Z, 0-9, ` ` and `_`.","info");
       return false;
     }
     return true;

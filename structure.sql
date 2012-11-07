@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `session` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `lastupdate` int(10) NOT NULL,
-  `repo_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `repo_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `com` int(11) NOT NULL,
   `cbq` double NOT NULL,
   `issue` int(11) NOT NULL,
