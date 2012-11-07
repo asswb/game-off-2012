@@ -17,7 +17,7 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="bootstrap/ico/favicon.png">
+    <link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
   </head>
 
   <body>
