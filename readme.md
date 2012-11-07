@@ -1,5 +1,7 @@
 ## GitHub Tycoon
 
+Check out the demo [here](50.116.63.25/ght)!
+
 # Requirements
 
 * PHP (Tested on [5.3.2-1ubuntu4.18 & 5.3.10-1ubuntu3.4](https://launchpad.net/php/+packages))
