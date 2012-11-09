@@ -1,5 +1,7 @@
 # GitHub Tycoon
 
+# GitHub Tycoon is a persistent software repository management simulation game.
+
 ## Demo
 
 Check out the demo: [http://githubtycoon.ftp.sh](http://githubtycoon.ftp.sh).
@@ -15,3 +17,15 @@ Check out the demo: [http://githubtycoon.ftp.sh](http://githubtycoon.ftp.sh).
 2. Run `./structure` so you can track when to update your MySQL structure. After the alpha release, we will write patches.
 3. Create a table and user, and import `/structure.sql` into that table.
 4. Copy `/config.sample.php` to `/config.php` and insert your database information along with a sufficiently strong and random salt.
+
+## Technologies used
+
+* PHP
+* MySQL
+* Twitter Bootstrap
+* Bootswatch
+
+## Screenshots
+
+![The Issues](https://raw.github.com/asswb/game-off-2012/master/dev/screenshots/screenshot1.png)
+![The Leaderboard](https://raw.github.com/asswb/game-off-2012/master/dev/screenshots/screenshot2.png)
