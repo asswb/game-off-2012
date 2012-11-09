@@ -1,6 +1,6 @@
 # GitHub Tycoon
 
-# GitHub Tycoon is a persistent software repository management simulation game.
+GitHub Tycoon is a persistent software repository management simulation game.
 
 ## Demo
 
