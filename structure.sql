@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `issue_table` (
 --
 
 INSERT INTO `issue_table` (`iid`, `name`, `description`, `type`, `time`, `delta_com`, `delta_cbq`, `chance`) VALUES
-(1, 'Simple Syntax Error', 'If you're happy and you know it, syntax error! I have a drag and drop GUI application for this.', 'bug', 1, 1, 1, 1),
+(1, 'Simple Syntax Error', 'If you\'re happy and you know it, syntax error! I have a drag and drop GUI application for this.', 'bug', 1, 1, 1, 1),
 (2, 'Simple Compilation Error', 'Typos can be a nusiance. I have a drag and drop GUI application for this.', 'bug', 1, 1, 1, 1),
 (3, 'Simple Run Time Error', 'Ouch! My program didn\'t like that! I have a drag and drop GUI application for this.', 'bug', 1, 1, 1, 1),
 (4, 'Simple Logic Error', 'Why isn\'t this section doing what it\'s supposed to be doing? I have a drag and drop GUI application for this.', 'bug', 1, 1, 1, 1),
