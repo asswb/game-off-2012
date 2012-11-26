@@ -20,10 +20,11 @@ Check out the demo: [http://githubtycoon.ftp.sh](http://githubtycoon.ftp.sh).
 
 ## Technologies used
 
-* PHP
-* MySQL
-* Twitter Bootstrap
-* Bootswatch
+* [PHP](http://php.net/)
+* [MySQL](http://www.mysql.com/)
+* [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
+* [Bootswatch](http://bootswatch.com/)
+* [Font Awesome](http://fortawesome.github.com/Font-Awesome/)
 
 ## Screenshots
 
