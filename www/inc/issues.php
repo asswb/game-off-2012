@@ -220,10 +220,9 @@ class issues {
     <td>{$time}</td>
     <td>
       <form action="" method="POST" class="btn-group">
-        <input type="hidden" name="uiid" value="{$issue['uiid']}" />
         <button class="btn" type="submit" title="Start" name="exe" value="issue-start"><i class="icon-play"></i></button>
-        <button class="btn" type="submit" title="Wontfix" name="exe" value="issue-wontfix"><i class="icon-ban-circle"></i></button>
-      </form>
+        <input type="hidden" name="uiid" value="{$issue['uiid']}" />
+        <button class="btn" type="submit" title="Wontfix" name="exe" value="issue-wontfix"><i class="icon-ban-circle"></i></button>      </form>
     </td>
   </tr>
 </tbody>
