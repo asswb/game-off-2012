@@ -20,4 +20,4 @@ wget http://bootswatch.com/spacelab/bootswatch.less
 patch -p0 < ../../bootstrap.less.patch
 patch -p0 < ../../font-awesome.less.patch
 
-lessc --compress ./less/bootstrap.less > ../../bootstrap.css
+lessc --compress bootstrap.less > ../../bootstrap.css
