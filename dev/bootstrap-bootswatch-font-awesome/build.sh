@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BOOTSWATCH='spacelab'
+BOOTSWATCH='cyborg'
 
 git clone https://github.com/twitter/bootstrap.git
 
