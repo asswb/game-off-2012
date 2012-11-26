@@ -21,3 +21,15 @@ tr.info {
 .landing_cbq {
   margin: 0px !important;
 }
+
+.label-bug {
+  background-color: #884444;
+}
+
+.label-enhancement {
+  background-color: #448844;
+}
+
+.label-pull_request {
+  background-color: #444488;
+}

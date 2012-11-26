@@ -164,11 +164,11 @@ class issues {
   private function type_classes($type){
     $t = "label";
     if($type=="bug"){
-      $classes = "$t $t-important";
+      $classes = "$t $t-bug";
     } elseif($type=="enhancement"){
-      $classes = "$t $t-success";
+      $classes = "$t $t-enhancement";
     } elseif($type=="pull_request"){
-      $classes = "$t $t-info";
+      $classes = "$t $t-pull_request";
     } else {
       $classes = "$t";
     }
