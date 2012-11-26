@@ -38,7 +38,7 @@ $difficulty = array(
   "Heroic" => "The only way to make this work is to use an FPGA and write the code in VHDL.",
   "Legendary" => "Whoever did this originally wrote it in Malbolge.",
   "Mythic" => "I need to find a COBOL programmer if I\'m going to fix this.",
-  "Godlike" => "This entire library needs to be rewritten in assembly.",
+  "Godlike" => "This entire thing needs to be rewritten in assembly.",
 );
 
 //echo count($difficulty) . " difficulties.\n";
@@ -113,6 +113,9 @@ $pull_request_types = array(
 
 function print_mysql($count,$name,$description,$type,$time,$delta_com,$delta_cbq,$chance){
   echo "($count, '$name', '$description', '$type', $time, $delta_com, $delta_cbq, $chance),\n";
+  if(strlen($name) > 64){
+    die("NAME LENGTH ERROR\n");
+  }
 }
 
 $count = 0;
