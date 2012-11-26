@@ -63,8 +63,12 @@ class issues {
       $new_bugs = 0;
       $new_issues = 0;
       $cache = $q->fetchAll(PDO::FETCH_ASSOC);
+      $current_count = $this->count();
       for($i=0;$i<$info->run;$i++){
         foreach($cache as $test){
+          if($new_issues + $current_count >= SYS_MAX_ISSUE_COUNT){
+            break;
+          }
           if(rand(0,100)<=$test['chance']){
             $q = $this->db->query("SELECT uiid FROM user_issue_table WHERE uid=".$this->db->quote($this->uid)." and iid=".$this->db->quote($test['iid']));
             $r = $q->fetchAll(PDO::FETCH_ASSOC);
