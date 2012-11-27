@@ -52,6 +52,7 @@ if(isset($exe)){
 
 $header_pages = array();
 $header_pages['leaderboard'] = "Leaderboard";
+$header_pages['chat'] = "Chat";
 if(isset($user->session)){
   $header_pages['issues'] = "Issues <span class=\"badge badge-inverse\">".(isset($issues)?$issues->count():"?")."</span>";
   $header_pages['settings'] = "Settings";
