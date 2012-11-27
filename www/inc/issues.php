@@ -59,11 +59,25 @@ class issues {
     }
     $info = $this->cron->run($lastupdate,SYS_ISSUE_INTERVAL);
     if($info->run > 0){
-      $q = $this->db->query("SELECT iid,chance FROM issue_table");
-      $new_bugs = 0;
+
       $new_issues = 0;
+
+      $q = $this->db->query("SELECT iid,chance FROM issue_table WHERE chance = 100");// You mat not have 100 chance bugs. TODO: Check type.
       $cache = $q->fetchAll(PDO::FETCH_ASSOC);
+      foreach($cache as $test){
+        $q = $this->db->query("SELECT uiid FROM user_issue_table WHERE uid=".$this->db->quote($this->uid)." and iid=".$this->db->quote($test['iid']));
+        $r = $q->fetchAll(PDO::FETCH_ASSOC);
+        if(count($r)==0){
+          $this->db->query("INSERT INTO user_issue_table (uid,iid) VALUES (".$this->db->quote($this->uid).",".$this->db->quote($test['iid']).");");
+          $new_issues++;
+        }
+      }
+      $cache = null;
+
+      $q = $this->db->query("SELECT iid,chance FROM issue_table ORDER BY RAND()");
       $current_count = $this->count();
+      $new_bugs = 0;
+      $cache = $q->fetchAll(PDO::FETCH_ASSOC);
       for($i=0;$i<$info->run;$i++){
         foreach($cache as $test){
           if($new_issues + $current_count >= SYS_MAX_ISSUE_COUNT){
