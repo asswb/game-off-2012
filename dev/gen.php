@@ -1,6 +1,23 @@
 #!/usr/bin/php
 <?php
 
+function print_mysql($count,$name,$description,$type,$time,$delta_com,$delta_cbq,$chance){
+  echo "($count, '$name', '$description', '$type', $time, $delta_com, $delta_cbq, $chance),\n";
+  if(strlen($name) > 64){
+    die("NAME LENGTH ERROR\n");
+  }
+}
+
+$count = 0;
+
+// Custom issues
+$count++;
+print_mysql($count,"Code Rebase","Rewrite major parts of the core and update to newest specifications.", 'enhancement', 120, 0, -1, 100);
+$count++;
+print_mysql($count,'Code Refactor', 'Refactor a segment of the code.', 'enhancement', 60, 0, 4, 100);
+$count++;
+print_mysql($count,'Color Change', '<pre>git rm -rf *\r\ngit commit -m "Fixed all bugs"\r\ngit push</pre>', 'pull_request', 2, -10, -1000, 1);
+
 $difficulty = array(
   "Simple" => "I have a drag and drop GUI application for this.",
   "Beginner" => "I can\'t believe this is actually an issue.",
@@ -44,7 +61,7 @@ $difficulty = array(
 //echo count($difficulty) . " difficulties.\n";
 
 $bug_types = array(
-  "Syntax Error" => "If you're happy and you know it, syntax error!",
+  "Syntax Error" => "If you\'re happy and you know it, syntax error!",
   "Compilation Error" => "Typos can be a nusiance.",
   "Run Time Error" => "Ouch! My program didn\'t like that!",
   "Logic Error" => "Why isn\'t this section doing what it\'s supposed to be doing?",
@@ -95,6 +112,7 @@ $enhancement_types = array(
   "Internal Logic" => "Logic will get you from A to B. Imagination will take you everywhere.",
   "Third Party Library" => "Why reinvent the wheel?",
   "Website" => "We need a design that POPS! Maybe even comic sans!",
+  "Mailing List" => "You know ... To send emails to and stuff.",
   "Forums" => "Calling all trolls.",
   "IRC Channel" => "Old enough to keep the technically challenged out.",
   "Phone App" => "I need to access this from my phone. Now.",
@@ -111,33 +129,41 @@ $pull_request_types = array(
 
 //echo count($pull_request_types) . " pull request types.\n";
 
-function print_mysql($count,$name,$description,$type,$time,$delta_com,$delta_cbq,$chance){
-  echo "($count, '$name', '$description', '$type', $time, $delta_com, $delta_cbq, $chance),\n";
-  if(strlen($name) > 64){
-    die("NAME LENGTH ERROR\n");
-  }
-}
-
-$count = 0;
+$difficulty_val = 0;
 foreach($difficulty as $dkey => $dvalue){
+  $difficulty_val++;
+  
+  $bug_val = 0;
   foreach($bug_types as $bkey => $bvalue){
+    $bug_val++;
     $count++;
-    print_mysql($count,"$dkey $bkey","$bvalue $dvalue",'bug',1,1,1,1);
+    $time = 10*$difficulty_val*($bug_val%10+1);
+    $delta_com = floor(($time^1.05)/10);
+    $delta_cbq = 2;
+    $chance = 1+floor((count($difficulty) - $difficulty_val)/10);
+    print_mysql($count,"$dkey $bkey","$bvalue $dvalue",'bug',$time,$delta_com,$delta_cbq,$chance);
   }
+  
+  $enhancement_val = 0;
   foreach($enhancement_types as $ekey => $evalue){
+    $enhancement_val++;
     $count++;
-    print_mysql($count,"$dkey $ekey","$evalue $dvalue",'enhancement',1,1,1,1);
+    $time = 10*$difficulty_val*($enhancement_val%10+1);
+    $delta_com = floor($time^1.5);
+    $delta_cbq = -2;
+    $chance = 1+floor((count($difficulty) - $difficulty_val)/10);
+    print_mysql($count,"$dkey $ekey","$evalue $dvalue",'enhancement',$time,$delta_com,$delta_cbq,$chance);
   }
+  
+  $pull_request_val = 0;
   foreach($pull_request_types as $pkey => $pvalue){
+    $pull_request_val++;
     $count++;
-    print_mysql($count,"$dkey $pkey","$pvalue $dvalue",'pull_request',1,1,1,1);
+    $time = 10;
+    $delta_com = floor($time^2);
+    $delta_cbq = -10;
+    $chance = 1;
+    print_mysql($count,"$dkey $pkey","$pvalue $dvalue",'pull_request',$time,$delta_com,$delta_cbq,$chance);
   }
+  
 }
-
-// Custom issues
-$count++;
-print_mysql($count,"Code Rebase","Rewrite major parts of the core and update to newest specifications.", 'enhancement', 240, 10, -2, 100);
-$count++;
-print_mysql($count,'Code Refactor', 'Refactor a segment of the code.', 'enhancement', 60, 0, 2, 100);
-$count++;
-print_mysql($count,'Color Change', '<pre>git rm -rf *\r\ngit commit -m "Fixed all bugs"\r\ngit push</pre>', 'pull_request', 2, -10, -10, 1);
