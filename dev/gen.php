@@ -132,38 +132,34 @@ $pull_request_types = array(
 $difficulty_val = 0;
 foreach($difficulty as $dkey => $dvalue){
   $difficulty_val++;
-  
   $bug_val = 0;
   foreach($bug_types as $bkey => $bvalue){
     $bug_val++;
     $count++;
     $time = 10*$difficulty_val*($bug_val%10+1);
-    $delta_com = floor(($time^1.05)/10);
+    $delta_com = floor(pow($time,1.05)/10);
     $delta_cbq = 2;
     $chance = 1+floor((count($difficulty) - $difficulty_val)/10);
     print_mysql($count,"$dkey $bkey","$bvalue $dvalue",'bug',$time,$delta_com,$delta_cbq,$chance);
   }
-  
   $enhancement_val = 0;
   foreach($enhancement_types as $ekey => $evalue){
     $enhancement_val++;
     $count++;
     $time = 10*$difficulty_val*($enhancement_val%10+1);
-    $delta_com = floor($time^1.5);
+    $delta_com = floor(pow($time,1.5));
     $delta_cbq = -2;
     $chance = 1+floor((count($difficulty) - $difficulty_val)/10);
     print_mysql($count,"$dkey $ekey","$evalue $dvalue",'enhancement',$time,$delta_com,$delta_cbq,$chance);
   }
-  
   $pull_request_val = 0;
   foreach($pull_request_types as $pkey => $pvalue){
     $pull_request_val++;
     $count++;
     $time = 10;
-    $delta_com = floor($time^2);
+    $delta_com = pow($difficulty_val*$pull_request_val,2);
     $delta_cbq = -10;
     $chance = 1;
     print_mysql($count,"$dkey $pkey","$pvalue $dvalue",'pull_request',$time,$delta_com,$delta_cbq,$chance);
   }
-  
 }
