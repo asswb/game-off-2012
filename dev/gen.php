@@ -12,7 +12,7 @@ $count = 0;
 
 // Custom issues
 $count++;
-print_mysql($count,"Code Rebase","Rewrite major parts of the core and update to newest specifications.", 'enhancement', 120, 0, -1, 100);
+print_mysql($count,"Code Rebase","Rewrite major parts of the core and update to newest specifications.", 'enhancement', 120, 0, 9, 100);
 $count++;
 print_mysql($count,'Code Refactor', 'Refactor a segment of the code.', 'enhancement', 60, 0, 4, 100);
 $count++;
@@ -129,6 +129,8 @@ $pull_request_types = array(
 
 //echo count($pull_request_types) . " pull request types.\n";
 
+$delta_comz = array();
+
 $difficulty_val = 0;
 foreach($difficulty as $dkey => $dvalue){
   $difficulty_val++;
@@ -137,29 +139,38 @@ foreach($difficulty as $dkey => $dvalue){
     $bug_val++;
     $count++;
     $time = 10*$difficulty_val*($bug_val%10+1);
-    $delta_com = floor(pow($time,1.05)/10);
+    $delta_com = floor(pow($time/10,1.01));
     $delta_cbq = 2;
     $chance = 1+floor((count($difficulty) - $difficulty_val)/10);
     print_mysql($count,"$dkey $bkey","$bvalue $dvalue",'bug',$time,$delta_com,$delta_cbq,$chance);
+    $delta_comz[] = $delta_com;
   }
   $enhancement_val = 0;
   foreach($enhancement_types as $ekey => $evalue){
     $enhancement_val++;
     $count++;
     $time = 10*$difficulty_val*($enhancement_val%10+1);
-    $delta_com = floor(pow($time,1.5));
+    $delta_com = floor(pow($time/10,1.1));
     $delta_cbq = -2;
     $chance = 1+floor((count($difficulty) - $difficulty_val)/10);
     print_mysql($count,"$dkey $ekey","$evalue $dvalue",'enhancement',$time,$delta_com,$delta_cbq,$chance);
+    $delta_comz[] = $delta_com;
   }
   $pull_request_val = 0;
   foreach($pull_request_types as $pkey => $pvalue){
     $pull_request_val++;
     $count++;
     $time = 10;
-    $delta_com = pow($difficulty_val*$pull_request_val,2);
+    $delta_com = floor(pow($difficulty_val*$pull_request_val,1.1));
     $delta_cbq = -10;
     $chance = 1;
     print_mysql($count,"$dkey $pkey","$pvalue $dvalue",'pull_request',$time,$delta_com,$delta_cbq,$chance);
+    $delta_comz[] = $delta_com;
   }
 }
+
+//$graph = array();
+//foreach($delta_comz as $val){
+//  $graph[floor($val/100)]++;
+//}
+//print_r($graph);
