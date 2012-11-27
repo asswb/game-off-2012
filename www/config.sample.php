@@ -23,7 +23,7 @@ define("SYS_ISSUE_INTERVAL",10);
 define("SYS_BUG_CBQ_CHANGE",-2);
 
 // This will multiply every time estimate by this value.
-define("SYS_ISSUE_FACTOR",10);
+define("SYS_ISSUE_FACTOR",1/5);
 
 // This will cap the number of issues per user.
 define("SYS_MAX_ISSUE_COUNT",10);
