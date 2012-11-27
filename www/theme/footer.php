@@ -5,15 +5,15 @@
     <div id="footer">
       <div class="container">
         <p class="muted credit">
-          This game is brought to you by <a href="http://josefnpat.com">josefnpat</a>
+          This game is brought to you by <a target="_blank" href="http://josefnpat.com">josefnpat</a>
             <a href="mailto:seppi@josefnpat.com"><i class="icon-envelope"></i></a>
-            <a href="https://github.com/josefnpat"><i class="icon-github"></i></a>
-            <a href="https://twitter.com/josefnpat"><i class="icon-twitter"></i></a>
+            <a target="_blank" href="https://github.com/josefnpat"><i class="icon-github"></i></a>
+            <a target="_blank" href="https://twitter.com/josefnpat"><i class="icon-twitter"></i></a>
           and
-          <a href="http://peterrstanley.com/">peterrstanley</a>
-            <a href="https://github.com/peterrstanley"><i class="icon-github"></i></a>
-            <a href="https://twitter.com/peterrstanley"><i class="icon-twitter"></i></a>
-            <a href="https://www.facebook.com/peterrstanley"><i class="icon-facebook"></i></a>
+          <a target="_blank" href="http://peterrstanley.com/">peterrstanley</a>
+            <a target="_blank" href="https://github.com/peterrstanley"><i class="icon-github"></i></a>
+            <a target="_blank" href="https://twitter.com/peterrstanley"><i class="icon-twitter"></i></a>
+            <a target="_blank" href="https://www.facebook.com/peterrstanley"><i class="icon-facebook"></i></a>
           .
           git-<?php echo `git log --pretty=%h -1`; ?> &mdash;
           v<?php echo `git log --pretty=format:'' | wc -l`; ?>
