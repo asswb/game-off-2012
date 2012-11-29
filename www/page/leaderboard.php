@@ -21,7 +21,7 @@ while($row = $q->fetch(PDO::FETCH_ASSOC)){
       <td>#<?php echo $rank; ?></td>
       <td><?php echo $row['username']; ?></td>
       <td><?php echo $row['repo_name']; ?></td>
-      <td><?php echo $row['com']; ?> people</td>
+      <td><?php echo $row['com']; ?> <?php echo (abs($row['com'])==1?"person":"people"); ?></td>
       <td>
         <div class="progress progress-success">
           <div class="bar" style="width: <?php echo $row['cbq']*100; ?>%;"><?php echo $row['cbq']*100; ?>%</div>

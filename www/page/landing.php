@@ -6,7 +6,7 @@ if(isset($user->session)){
   <dt>Score</dt>
   <dd><?php echo $user->data['com']*$user->data['cbq'];?></dd>
   <dt>Community</dt>
-  <dd><?php echo $user->data['com'];?> people</dd>
+  <dd><?php echo $user->data['com'];?> <?php echo (abs($user->data['com'])==1?"person":"people"); ?></dd>
   <dt>Code Base Quality</dt>
   <dd>
     <div class="progress progress-success span2 landing_cbq">
